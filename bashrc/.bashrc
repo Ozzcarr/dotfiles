@@ -1,3 +1,5 @@
+eval "$(starship init bash)"
+
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
@@ -13,5 +15,3 @@ alias term='basename "$(cat "/proc/$PPID/comm")"'
 #
 # Set a custom prompt with the directory revealed (alternatively use https://starship.rs)
 # PS1="\W \[\e]0;\w\a\]$PS1"
-
-eval "$(starship init bash)"
