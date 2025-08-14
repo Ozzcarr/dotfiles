@@ -1,17 +1,25 @@
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+
+nopad() {
+  local sock="$KITTY_LISTEN_ON"
+  if [[ -z "$sock" ]]; then
+    # fallback: try to detect socket if not in env
+    sock=$(kitty @ ls 2>/dev/null | grep -o 'unix:[^"]*' | head -n1)
+  fi
+
+  kitty @ set-spacing padding=0
+  "$@"
+  kitty @ set-spacing padding=default
+}
+
+nvim() { nopad command nvim "$@"; }
+yazi() { nopad command yazi "$@"; }
+
+eval "$(tmuxifier init -)"
 eval "$(starship init bash)"
+
+alias term='basename "$(cat "/proc/$PPID/comm")"'
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
-
-# Add your own exports, aliases, and functions here.
-#
-# Make an alias for invoking commands you use constantly
-# alias p='python'
-alias term='basename "$(cat "/proc/$PPID/comm")"'
-#
-# Use VSCode instead of neovim as your default editor
-# export EDITOR="code"
-#
-# Set a custom prompt with the directory revealed (alternatively use https://starship.rs)
-# PS1="\W \[\e]0;\w\a\]$PS1"
