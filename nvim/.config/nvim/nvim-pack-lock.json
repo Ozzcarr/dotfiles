@@ -8,6 +8,10 @@
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
     },
+    "leap.nvim": {
+      "rev": "b3f60bab38bdcbaa79a3ea0fd0f5be2a425572d6",
+      "src": "https://codeberg.org/andyg/leap.nvim"
+    },
     "mason.nvim": {
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
