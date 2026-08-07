@@ -7,6 +7,8 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.termguicolors = true
+vim.opt.cmdheight = 0
+vim.opt.showmode = false
 
 -- Indent
 vim.opt.expandtab = true
