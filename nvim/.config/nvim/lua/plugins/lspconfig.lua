@@ -9,3 +9,4 @@ require('mason-registry').refresh(function()
 end)
 
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('nixd')
