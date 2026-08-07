@@ -12,3 +12,12 @@ map('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostics to loclist' })
+
+map('n', '<leader>cf', function() vim.lsp.buf.format({ async = true }) end, { desc = 'Format' })
+map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
+map('n', '<leader>co', function()
+  vim.lsp.buf.code_action({
+    context = { only = { 'source.organizeImports' }, diagnostics = {} },
+    apply = true,
+  })
+end, { desc = 'Organize imports' })
