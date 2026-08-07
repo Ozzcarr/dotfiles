@@ -1,5 +1,3 @@
--- Requires plugins.mason to have run first (registry + PATH shim).
-
 vim.pack.add({
   { src = 'https://github.com/neovim/nvim-lspconfig' },
 })

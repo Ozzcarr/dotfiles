@@ -1,5 +1,3 @@
--- https://neovim.io/doc/user/options.html
-
 -- UI
 vim.opt.number = true
 vim.opt.relativenumber = true

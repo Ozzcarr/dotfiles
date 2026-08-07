@@ -9,8 +9,6 @@ require('snacks').setup({
     },
   },
   dashboard = {
-    -- Default sections include "startup", which hard-requires lazy.nvim's
-    -- stats module; this config uses vim.pack, so swap it for recent files.
     sections = {
       { section = 'header' },
       { section = 'keys', gap = 1, padding = 1 },
