@@ -1,5 +1,6 @@
 require('plugins.catppuccin')
 require('plugins.treesitter')
+require('plugins.rainbow-delimiters')
 require('plugins.mason')
 require('plugins.lspconfig')
 require('plugins.lazydev')

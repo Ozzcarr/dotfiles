@@ -4,6 +4,9 @@ vim.pack.add({
 
 require('catppuccin').setup({
   flavour = 'mocha',
+  integrations = {
+    rainbow_delimiters = true,
+  },
 })
 
 vim.cmd.colorscheme('catppuccin')
