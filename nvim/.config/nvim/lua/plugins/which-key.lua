@@ -2,7 +2,10 @@ vim.pack.add({
   { src = 'https://github.com/folke/which-key.nvim' },
 })
 
-require('which-key').setup({})
+require('which-key').setup({
+  preset = 'modern',
+  delay = 500,
+})
 
 require('which-key').add({
   { '<leader>c', group = 'Code' },
