@@ -21,3 +21,5 @@ map('n', '<leader>co', function()
     apply = true,
   })
 end, { desc = 'Organize imports' })
+
+map('n', '<leader>wr', '<cmd>restart<CR>', { desc = 'Reload Neovim' })
