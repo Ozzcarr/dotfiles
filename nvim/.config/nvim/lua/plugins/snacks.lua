@@ -2,10 +2,12 @@ vim.pack.add({
   { src = 'https://github.com/folke/snacks.nvim' },
 })
 
--- Only pass the modules you want; snacks.setup() only auto-enables
--- the keys present in this table, everything else stays off.
 require('snacks').setup({
-  picker = {},
+  picker = {
+    sources = {
+      explorer = { hidden = true },
+    },
+  },
   dashboard = {
     -- Default sections include "startup", which hard-requires lazy.nvim's
     -- stats module; this config uses vim.pack, so swap it for recent files.
