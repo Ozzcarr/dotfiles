@@ -57,6 +57,7 @@ map('n', '<leader>fg', function() Snacks.picker.grep() end, { desc = 'Live grep'
 map('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = 'Recent files' })
 map('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazygit' })
 map('n', '<leader>gl', function() Snacks.lazygit.log_file() end, { desc = 'Lazygit Log (cwd)' })
+map('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git blame line' })
 
 Snacks.dashboard.sections.pack_startup = function()
   local ms = math.floor((vim.uv.hrtime() - _G.nvim_start_time) / 1e6 * 100 + 0.5) / 100
