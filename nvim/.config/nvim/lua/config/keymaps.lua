@@ -27,5 +27,8 @@ map('n', '<leader>co', function()
   })
 end, { desc = 'Organize imports' })
 
+-- Files
+map({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
+
 -- Neovim
 map('n', '<leader>wr', '<cmd>restart<CR>', { desc = 'Reload Neovim' })
