@@ -18,7 +18,7 @@ map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostics to loclist' })
 
 -- LSP
-map('n', '<leader>cf', function() vim.lsp.buf.format({ async = true }) end, { desc = 'Format' })
+map('n', '<leader>cf', function() require('conform').format({ async = true, lsp_format = 'fallback' }) end, { desc = 'Format' })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
 map('n', '<leader>co', function()
   vim.lsp.buf.code_action({
