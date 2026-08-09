@@ -13,5 +13,6 @@ require('which-key').add({
   { '<leader>f', group = 'Find' },
   { '<leader>g', group = 'Git' },
   { '<leader>m', desc = 'Mason', icon = { icon = '', color = 'orange' } },
+  { '<leader>t', desc = 'Terminal' },
   { '<leader>w', group = 'Window' },
 })
