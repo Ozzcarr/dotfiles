@@ -1,0 +1,228 @@
+@import "mocha.css";
+
+* {
+  font-family: "Maple Mono NF";
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 46, 0.92);
+  color: @text;
+  border: none;
+  border-bottom: 2px solid @mauve;
+  border-radius: 0;
+  margin: 0;
+}
+
+#workspaces {
+  border-radius: 1rem;
+  margin: 4px;
+  background-color: @surface0;
+  margin-left: 0.75rem;
+}
+
+#workspaces button {
+  color: @lavender;
+  border-radius: 1rem;
+  padding: 0rem;
+}
+
+#workspaces button label {
+  font-size: 20px;
+}
+
+#workspaces button.active {
+  color: @sky;
+  border-radius: 1rem;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+  border-radius: 1rem;
+}
+
+#cpu, #custom-gpu, #memory {
+  background-color: @surface0;
+  padding: 0.3rem 0.6rem;
+  margin: 4px 0;
+  color: @text;
+}
+
+#cpu {
+  margin-left: 0.4rem;
+  border-radius: 1rem 0 0 1rem;
+  color: @peach;
+}
+
+#custom-gpu {
+  border-radius: 0;
+  color: @sky;
+}
+
+#memory {
+  margin-right: 0.6rem;
+  border-radius: 0 1rem 1rem 0;
+  color: @teal;
+}
+
+#custom-music,
+#custom-vesktop-mic,
+#custom-vesktop-out,
+#tray,
+#backlight,
+#clock,
+#battery,
+#custom-pomodoro,
+#pulseaudio,
+#custom-notification,
+#custom-lock,
+#custom-power {
+  background-color: @surface0;
+  padding: 0.3rem 0.8rem;
+  margin: 4px 0;
+}
+
+#clock {
+  color: @blue;
+  border-radius: 0px 1rem 1rem 0px;
+  margin-right: 1rem;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning:not(.charging) {
+  color: @red;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#backlight, #battery {
+    border-radius: 0;
+}
+
+#pulseaudio {
+  color: @maroon;
+  border-radius: 1rem 0px 0px 1rem;
+  margin-left: 1rem;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
+#custom-pomodoro {
+  border-radius: 1rem;
+}
+
+#custom-pomodoro.focus {
+  color: @peach;
+}
+
+#custom-pomodoro.break {
+  color: @green;
+}
+
+#custom-pomodoro.paused {
+  color: @yellow;
+}
+
+#custom-pomodoro.idle {
+  color: @overlay1;
+}
+
+#custom-vesktop-mic {
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 1rem;
+  padding-right: 0.45rem;
+  color: @green;
+}
+
+#custom-vesktop-out {
+  border-radius: 0 1rem 1rem 0;
+  margin-right: 0;
+  padding-left: 0.45rem;
+  color: @green;
+}
+
+#custom-vesktop-mic.active,
+#custom-vesktop-out.active {
+  color: @green;
+}
+
+#custom-vesktop-mic.muted {
+  color: @red;
+}
+
+#custom-vesktop-out.deafened {
+  color: @red;
+}
+
+#custom-vesktop-mic.missing,
+#custom-vesktop-out.missing {
+  color: @overlay1;
+}
+
+#custom-notification {
+  color: @lavender;
+  border-radius: 1rem;
+  margin-right: 0.5rem;
+}
+
+#custom-lock {
+    border-radius: 1rem 0px 0px 1rem;
+    color: @lavender;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    border-radius: 0px 1rem 1rem 0px;
+    color: @red;
+}
+
+#tray {
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
+tooltip {
+  background: @base;
+  color: @text;
+  border: 1px solid @surface1;
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+tooltip label {
+  color: @text;
+}
+
+tooltip calendar {
+  color: @text;
+}
+
+tooltip calendar.header {
+  color: @mauve;
+}
+
+tooltip calendar.button {
+  color: @blue;
+}
+
+tooltip calendar.highlight {
+  color: @green;
+}
+
+tooltip calendar:indeterminate {
+  color: @overlay0;
+}
