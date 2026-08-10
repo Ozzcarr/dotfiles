@@ -1,0 +1,161 @@
+"$schema" = "https://starship.rs/config-schema.json"
+format = "[](red)$os$username$hostname[](bg:peach fg:red)$directory[](bg:yellow fg:peach)$git_branch$git_status[](fg:yellow bg:green)$c$rust$golang$nodejs$php$java$kotlin$haskell$python[](fg:green bg:sapphire)$nix_shell[](fg:sapphire bg:lavender)$time[ ](fg:lavender)$cmd_duration$line_break$character"
+palette = "catppuccin_mocha"
+
+[c]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = " "
+
+[character]
+error_symbol = "[❯](bold fg:red)"
+success_symbol = "[❯](bold fg:green)"
+vimcmd_replace_one_symbol = "[❮](bold fg:lavender)"
+vimcmd_replace_symbol = "[❮](bold fg:lavender)"
+vimcmd_symbol = "[❮](bold fg:green)"
+vimcmd_visual_symbol = "[❮](bold fg:yellow)"
+
+[cmd_duration]
+format = " in $duration "
+show_milliseconds = true
+style = "bg:lavender"
+
+[directory]
+fish_style_pwd_dir_length = 1
+format = "[ $path ]($style)"
+style = "bg:peach fg:crust"
+truncation_length = 2
+truncation_symbol = "…/"
+
+[docker_context]
+format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)"
+style = "bg:sapphire"
+symbol = ""
+
+[git_branch]
+format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"
+style = "bg:yellow"
+symbol = ""
+
+[git_status]
+format = "[[(*$ahead_behind )](fg:crust bg:yellow)]($style)"
+style = "bg:yellow"
+
+[golang]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[haskell]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[hostname]
+format = "[@$hostname]($style)"
+style = "bg:red fg:crust"
+
+[java]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = " "
+
+[kotlin]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[line_break]
+disabled = true
+
+[nix_shell]
+format = "[$symbol ]($style)"
+style = "fg:crust bg:sapphire"
+symbol = "  "
+
+[nodejs]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[os]
+disabled = false
+style = "bg:red fg:crust"
+
+[os.symbols]
+AOSC = ""
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Fedora = "󰣛"
+Gentoo = "󰣨"
+Linux = "󰌽"
+Macos = "󰀵"
+Manjaro = ""
+Mint = "󰣭"
+NixOS = ""
+Raspbian = "󰐿"
+RedHatEnterprise = "󱄛"
+Redhat = "󱄛"
+SUSE = ""
+Ubuntu = "󰕈"
+Windows = ""
+
+[palettes.catppuccin_mocha]
+base = "#1e1e2e"
+blue = "#89b4fa"
+crust = "#11111b"
+flamingo = "#f2cdcd"
+green = "#a6e3a1"
+lavender = "#b4befe"
+mantle = "#181825"
+maroon = "#eba0ac"
+mauve = "#cba6f7"
+overlay0 = "#6c7086"
+overlay1 = "#7f849c"
+overlay2 = "#9399b2"
+peach = "#fab387"
+pink = "#f5c2e7"
+red = "#f38ba8"
+rosewater = "#f5e0dc"
+sapphire = "#74c7ec"
+sky = "#89dceb"
+subtext0 = "#a6adc8"
+subtext1 = "#bac2de"
+surface0 = "#313244"
+surface1 = "#45475a"
+surface2 = "#585b70"
+teal = "#94e2d5"
+text = "#cdd6f4"
+yellow = "#f9e2af"
+
+[php]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[python]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[rust]
+format = "[[ $symbol( $version) ](fg:crust bg:green)]($style)"
+style = "bg:green"
+symbol = ""
+
+[time]
+disabled = false
+format = "[[  $time ](fg:crust bg:lavender)]($style)"
+style = "bg:lavender"
+time_format = "%R"
+
+[username]
+format = "[ $user]($style)"
+show_always = true
+style_root = "bg:red fg:crust"
+style_user = "bg:red fg:crust"
