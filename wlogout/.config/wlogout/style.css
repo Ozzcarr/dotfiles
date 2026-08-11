@@ -1,0 +1,74 @@
+/* Catppuccin Mocha (mauve), from https://github.com/catppuccin/wlogout
+   themes/mocha/mauve.css, with two additions layered on top: vim-style
+   h/j/k/l navigation, and a hover style separate from focus/active (see
+   below for why). */
+
+@binding-set vim-nav {
+  bind "h" { "move-focus" (left) };
+  bind "j" { "move-focus" (down) };
+  bind "k" { "move-focus" (up) };
+  bind "l" { "move-focus" (right) };
+}
+
+* {
+  background-image: none;
+  box-shadow: none;
+  font-family: "JetBrainsMono NF", FontAwesome, sans-serif;
+}
+
+window {
+  background-color: rgba(30, 30, 46, 0.90);
+  -gtk-key-bindings: vim-nav;
+}
+
+button {
+  border-radius: 0;
+  border-color: #cba6f7;
+  text-decoration-color: #cdd6f4;
+  color: #cdd6f4;
+  background-color: #181825;
+  border-style: solid;
+  border-width: 1px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25%;
+}
+
+/* Keyboard focus is the one authoritative "this is what Enter triggers"
+   indicator. Hover is a lighter preview so it doesn't read as a second,
+   equally-active selection when it lands on a different button than the
+   current focus (the upstream theme merges all three into one style). */
+button:focus,
+button:active {
+  background-color: rgb(48, 50, 66); /* 20% overlay2, 80% mantle */
+  outline-style: none;
+}
+
+button:hover {
+  border-color: #cdd6f4;
+  outline-style: none;
+}
+
+#lock {
+  background-image: url("icons/lock.svg");
+}
+
+#logout {
+  background-image: url("icons/logout.svg");
+}
+
+#suspend {
+  background-image: url("icons/suspend.svg");
+}
+
+#hibernate {
+  background-image: url("icons/hibernate.svg");
+}
+
+#shutdown {
+  background-image: url("icons/shutdown.svg");
+}
+
+#reboot {
+  background-image: url("icons/reboot.svg");
+}
