@@ -10,7 +10,7 @@ mainbox {
 inputbar {
   padding: 75px 40px;
   background-color: transparent;
-  background-image: url("~/Pictures/Wallpapers/cat-blue-eye.png", width);
+  background-image: url("~/Pictures/Wallpapers/lofiwallpaper.png", width);
   text-color: @foreground;
   children: [ "textbox-prompt-colon", "entry" ];
 }
