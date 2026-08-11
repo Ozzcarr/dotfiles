@@ -100,7 +100,7 @@ text-color: @foreground;
 
 imagebox {
 background-color: transparent;
-background-image: url("~/Pictures/Wallpapers/lofiwallpaper.png", height);
+background-image: url("~/dotfiles/wallpapers/lofiwallpaper.png", height);
 children: [ inputbar,dummy,mode-switcher ];
 orientation: vertical;
 padding: 20px;
