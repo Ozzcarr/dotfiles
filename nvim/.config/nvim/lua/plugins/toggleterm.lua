@@ -6,6 +6,7 @@ local mauve = require('catppuccin.palettes').get_palette('mocha').mauve
 
 require('toggleterm').setup({
   open_mapping = [[<leader>t]],
+  insert_mappings = false,
   direction = 'float',
   terminal_mappings = false,
   float_opts = {
