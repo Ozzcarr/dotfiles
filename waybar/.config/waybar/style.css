@@ -172,7 +172,7 @@ tooltip calendar:indeterminate {
 
 #clock {
   background-color: @base;
-  margin: 3px 8px;
+  margin: 3px 0 3px 8px;
   padding: 3px 10px;
   color: @blue;
 }
