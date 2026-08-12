@@ -32,3 +32,10 @@ map({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
 
 -- Neovim
 map('n', '<leader>wr', '<cmd>restart<CR>', { desc = 'Reload Neovim' })
+
+-- UI
+map('n', '<leader>uc', function() vim.wo.cursorline = not vim.wo.cursorline end, { desc = 'Toggle cursorline' })
+map('n', '<leader>ul', function() vim.wo.number = not vim.wo.number end, { desc = 'Toggle line numbers' })
+map('n', '<leader>uL', function() vim.wo.relativenumber = not vim.wo.relativenumber end, { desc = 'Toggle relative line numbers' })
+map('n', '<leader>us', function() vim.wo.spell = not vim.wo.spell end, { desc = 'Toggle spell check' })
+map('n', '<leader>uw', function() vim.wo.wrap = not vim.wo.wrap end, { desc = 'Toggle word wrap' })
