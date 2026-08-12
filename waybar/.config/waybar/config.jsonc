@@ -47,7 +47,7 @@
     "exec": "gpu-status",
   },
   "tray": {
-    "icon-size": 21,
+    "icon-size": 16,
     "spacing": 10,
   },
   "custom/music": {
