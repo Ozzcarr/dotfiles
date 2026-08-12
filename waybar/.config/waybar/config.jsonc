@@ -1,17 +1,22 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["hyprland/workspaces", "cpu", "custom/gpu", "memory"],
-  "modules-center": ["custom/music"],
-  "modules-right": [
-    "custom/pomodoro",
+  "margin-top": 3,
+  "modules-left": [
+    "cpu",
+    "custom/gpu",
+    "memory",
     "custom/vesktop-mic",
     "custom/vesktop-out",
     "pulseaudio",
+    "custom/music",
+  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": [
+    "tray",
     "backlight",
     "battery",
     "clock",
-    "tray",
     "custom/notification",
     "custom/lock",
     "custom/power",
@@ -19,7 +24,7 @@
   "hyprland/workspaces": {
     "disable-scroll": true,
     "sort-by-name": true,
-    "format": " {icon} ",
+    "format": "{icon}",
     "format-icons": {
       "default": "●",
     },
@@ -54,16 +59,6 @@
     "on-click": "playerctl --player=spotify,firefox play-pause",
     "max-length": 50,
   },
-  "custom/pomodoro": {
-    "interval": 1,
-    "return-type": "json",
-    "format": "{}",
-    "exec": "pomodoro-waybar status",
-    "on-click": "pomodoro-waybar toggle",
-    "on-click-right": "pomodoro-waybar reset",
-    "on-click-middle": "pomodoro-waybar skip",
-    "tooltip": true,
-  },
   "custom/vesktop-mic": {
     "interval": 1,
     "return-type": "json",
@@ -82,8 +77,8 @@
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": " {:%d/%m/%Y}",
-    "format": " {:%H:%M}",
+    "format-alt": " {:%H:%M | %Y-%m-%d}",
+    "format": " {:%H:%M | %a %d %b}",
   },
   "backlight": {
     "device": "intel_backlight",
