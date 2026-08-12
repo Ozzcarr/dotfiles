@@ -66,7 +66,7 @@ style = "bg:green"
 symbol = ""
 
 [line_break]
-disabled = true
+disabled = false
 
 [nix_shell]
 format = "[$symbol ]($style)"
