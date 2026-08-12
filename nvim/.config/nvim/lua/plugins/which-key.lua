@@ -16,4 +16,5 @@ require('which-key').add({
   { '<leader>t', desc = 'Terminal' },
   { '<leader>u', group = 'UI' },
   { '<leader>w', group = 'Window' },
+  { 'gs', group = 'Surround', mode = { 'n', 'x' } },
 })
