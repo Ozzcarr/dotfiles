@@ -57,7 +57,7 @@
     "tooltip": false,
     "exec": "playerctl --player=spotify,firefox metadata --format='{{ title }}'",
     "on-click": "playerctl --player=spotify,firefox play-pause",
-    "max-length": 50,
+    "max-length": 100,
   },
   "custom/vesktop-mic": {
     "interval": 1,
