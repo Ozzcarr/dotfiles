@@ -4,6 +4,7 @@ vim.pack.add({
 })
 
 require('noice').setup({
+  presets = { inc_rename = true },
   cmdline = {
     view = 'cmdline_popup',
   },
