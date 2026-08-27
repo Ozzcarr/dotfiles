@@ -8,6 +8,8 @@ local parsers = {
   'typescript',
   'tsx',
   'python',
+  'markdown',
+  'markdown_inline',
 }
 
 require('nvim-treesitter').install(parsers)
