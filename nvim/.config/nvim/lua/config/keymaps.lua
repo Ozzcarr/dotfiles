@@ -10,6 +10,17 @@ map('n', '<leader>wd', '<cmd>close<CR>', { desc = 'Close window' })
 map('n', '<leader>wo', '<cmd>only<CR>', { desc = 'Close other windows' })
 map('n', '<leader>w=', '<C-w>=', { desc = 'Equalize windows' })
 
+-- Buffers
+map('n', '<leader>bd', function() require('mini.bufremove').delete(0, false) end, { desc = 'Close buffer' })
+map('n', '<leader>bo', function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.bo[buf].buflisted then
+      require('mini.bufremove').delete(buf, false)
+    end
+  end
+end, { desc = 'Close other buffers' })
+
 local resize = require('utils.window').resize
 map('n', '<C-Left>', resize('left'), { desc = 'Move divider left' })
 map('n', '<C-Down>', resize('down'), { desc = 'Move divider down' })
@@ -22,7 +33,14 @@ map('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Diagnostics
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostics to loclist' })
+map('n', ']e', function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = 'Next error' })
+map('n', '[e', function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = 'Previous error' })
+map('n', ']w', function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN }) end,
+  { desc = 'Next warning' })
+map('n', '[w', function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN }) end,
+  { desc = 'Previous warning' })
 
 -- LSP
 map('n', 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' })
