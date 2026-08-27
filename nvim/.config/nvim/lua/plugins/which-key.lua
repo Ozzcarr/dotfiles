@@ -8,6 +8,7 @@ require('which-key').setup({
 })
 
 require('which-key').add({
+  { '<leader>a', group = 'AI', icon = { icon = '󰚩', color = 'orange' } },
   { '<leader>c', group = 'Code' },
   { '<leader>d', group = 'Docker', icon = { icon = '󰡨', color = 'blue' } },
   { '<leader>f', group = 'Find' },
