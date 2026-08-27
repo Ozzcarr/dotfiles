@@ -4,10 +4,17 @@ local map = vim.keymap.set
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
 
 -- Windows
-map('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
-map('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window' })
-map('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window' })
-map('n', '<C-l>', '<C-w>l', { desc = 'Go to right window' })
+map('n', '<leader>|', '<cmd>vsplit<CR>', { desc = 'Split window right' })
+map('n', '<leader>-', '<cmd>split<CR>', { desc = 'Split window below' })
+map('n', '<leader>wd', '<cmd>close<CR>', { desc = 'Close window' })
+map('n', '<leader>wo', '<cmd>only<CR>', { desc = 'Close other windows' })
+map('n', '<leader>w=', '<C-w>=', { desc = 'Equalize windows' })
+
+local resize = require('utils.window').resize
+map('n', '<C-Left>', resize('left'), { desc = 'Move divider left' })
+map('n', '<C-Down>', resize('down'), { desc = 'Move divider down' })
+map('n', '<C-Up>', resize('up'), { desc = 'Move divider up' })
+map('n', '<C-Right>', resize('right'), { desc = 'Move divider right' })
 
 -- Editing
 map('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
