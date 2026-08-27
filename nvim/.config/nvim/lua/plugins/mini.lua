@@ -4,6 +4,7 @@ vim.pack.add({
 
 require('mini.icons').setup()
 require('mini.ai').setup({})
+require('mini.pairs').setup()
 require('mini.surround').setup({
   mappings = {
     add = 'gsa',
