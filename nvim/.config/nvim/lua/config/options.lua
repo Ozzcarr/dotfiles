@@ -31,6 +31,7 @@ vim.opt.splitbelow = true
 vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.backup = false
+vim.opt.autoread = true
 
 -- Behavior
 vim.opt.clipboard = 'unnamedplus'
