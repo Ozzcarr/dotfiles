@@ -29,6 +29,7 @@ map('n', 'gd', vim.lsp.buf.definition, { desc = 'Goto Definition' })
 map('n', '<leader>cf', function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
   { desc = 'Format' })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
+map('n', '<leader>cr', vim.lsp.buf.rename, { desc = 'Rename symbol' })
 map('n', '<leader>co', function()
   vim.lsp.buf.code_action({
     context = { only = { 'source.organizeImports' }, diagnostics = {} },
