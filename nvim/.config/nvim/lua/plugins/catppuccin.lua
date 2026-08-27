@@ -6,6 +6,7 @@ require('catppuccin').setup({
   flavour = 'mocha',
   integrations = {
     rainbow_delimiters = true,
+    blink_cmp = true,
   },
 })
 
