@@ -7,6 +7,7 @@ local parsers = {
   'nix',
   'typescript',
   'tsx',
+  'python',
 }
 
 require('nvim-treesitter').install(parsers)

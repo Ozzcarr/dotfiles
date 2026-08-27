@@ -14,5 +14,6 @@ require('conform').setup({
     html = { 'prettierd' },
     markdown = { 'prettierd' },
     yaml = { 'prettierd' },
+    python = { 'ruff_format' },
   },
 })
