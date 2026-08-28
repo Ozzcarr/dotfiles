@@ -5,10 +5,10 @@ vim.pack.add({
 local mauve = require('catppuccin.palettes').get_palette('mocha').mauve
 
 require('toggleterm').setup({
-  open_mapping = [[<leader>t]],
-  insert_mappings = false,
+  open_mapping = [[<C-t>]],
+  insert_mappings = true,
   direction = 'float',
-  terminal_mappings = false,
+  terminal_mappings = true,
   float_opts = {
     border = 'curved',
   },
