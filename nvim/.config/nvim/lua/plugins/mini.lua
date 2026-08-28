@@ -6,6 +6,7 @@ require('mini.icons').setup()
 require('mini.ai').setup({})
 require('mini.pairs').setup()
 require('mini.bufremove').setup()
+require('mini.splitjoin').setup()
 require('mini.surround').setup({
   mappings = {
     add = 'gsa',
