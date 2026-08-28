@@ -33,6 +33,8 @@ map('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
 -- Diagnostics
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
+map('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = 'Next diagnostic' })
+map('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = 'Previous diagnostic' })
 map('n', ']e', function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
   { desc = 'Next error' })
 map('n', '[e', function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end,
