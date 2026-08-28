@@ -48,6 +48,7 @@ require('snacks').setup({
   statuscolumn = {},
   words = {},
   explorer = {},
+  scratch = {},
 })
 
 local map = vim.keymap.set
@@ -60,6 +61,11 @@ map('n', '<leader>fr', function() Snacks.picker.recent() end, { desc = 'Recent f
 map('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Lazygit' })
 map('n', '<leader>gl', function() Snacks.lazygit.log_file() end, { desc = 'Lazygit Log (cwd)' })
 map('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git blame line' })
+map('n', '<leader>.', function() Snacks.scratch() end, { desc = 'Toggle scratch buffer' })
+map('n', '<leader>S', function() Snacks.scratch.select() end, { desc = 'Select scratch buffer' })
+map('n', '<leader>t', function()
+  Snacks.scratch({ ft = 'markdown', name = 'Todo', filekey = { cwd = false, branch = false, count = false } })
+end, { desc = 'Todo scratch' })
 
 Snacks.dashboard.sections.pack_startup = function()
   local ms = math.floor((vim.uv.hrtime() - _G.nvim_start_time) / 1e6 * 100 + 0.5) / 100

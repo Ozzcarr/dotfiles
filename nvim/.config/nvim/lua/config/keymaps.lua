@@ -73,3 +73,4 @@ map('n', '<leader>us', function() vim.wo.spell = not vim.wo.spell end, { desc = 
 map('n', '<leader>uw', function() vim.wo.wrap = not vim.wo.wrap end, { desc = 'Toggle word wrap' })
 map('n', '<leader>ui', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
   { desc = 'Toggle inlay hints' })
+map('n', '<leader>ut', '<cmd>TSContext toggle<CR>', { desc = 'Toggle treesitter context' })
