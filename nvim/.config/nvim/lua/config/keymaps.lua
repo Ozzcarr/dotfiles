@@ -22,10 +22,10 @@ map('n', '<leader>bo', function()
 end, { desc = 'Close other buffers' })
 
 local resize = require('utils.window').resize
-map('n', '<C-Left>', resize('left'), { desc = 'Move divider left' })
-map('n', '<C-Down>', resize('down'), { desc = 'Move divider down' })
-map('n', '<C-Up>', resize('up'), { desc = 'Move divider up' })
-map('n', '<C-Right>', resize('right'), { desc = 'Move divider right' })
+map({ 'n', 't' }, '<C-Left>', resize('left'), { desc = 'Move divider left' })
+map({ 'n', 't' }, '<C-Down>', resize('down'), { desc = 'Move divider down' })
+map({ 'n', 't' }, '<C-Up>', resize('up'), { desc = 'Move divider up' })
+map({ 'n', 't' }, '<C-Right>', resize('right'), { desc = 'Move divider right' })
 
 -- Editing
 map('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
