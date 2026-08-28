@@ -15,5 +15,8 @@ require('conform').setup({
     markdown = { 'prettierd' },
     yaml = { 'prettierd' },
     python = { 'ruff_format' },
+    toml = { 'taplo' },
+    sh = { 'shfmt' },
+    bash = { 'shfmt' },
   },
 })

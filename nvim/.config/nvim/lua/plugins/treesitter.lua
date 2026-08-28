@@ -10,6 +10,15 @@ local parsers = {
   'python',
   'markdown',
   'markdown_inline',
+  'json',
+  'yaml',
+  'toml',
+  'dockerfile',
+  'bash',
+  'gitignore',
+  'git_config',
+  'gitcommit',
+  'diff',
 }
 
 require('nvim-treesitter').install(parsers)

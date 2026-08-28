@@ -13,6 +13,13 @@ require('catppuccin').setup({
       background = false,
     },
   },
+  custom_highlights = function(colors)
+    return {
+      ['@property.json'] = { fg = colors.blue },
+      ['@property.yaml'] = { fg = colors.blue },
+      ['@property.toml'] = { fg = colors.blue },
+    }
+  end,
 })
 
 vim.cmd.colorscheme('catppuccin')
