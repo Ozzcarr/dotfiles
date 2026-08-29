@@ -22,6 +22,18 @@ vim.lsp.config('*', {
   capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
 
+-- nixd resolves packages only under the names `pkgs` and `lib`, against this
+-- expression. Pointing it at the flake gives hovers the pinned versions.
+vim.lsp.config('nixd', {
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = '(builtins.getFlake "/home/oscar/nix-config").legacyPackages.x86_64-linux',
+      },
+    },
+  },
+})
+
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('nixd')
 vim.lsp.enable('ts_ls')
