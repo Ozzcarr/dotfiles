@@ -16,9 +16,10 @@ window#waybar {
 
 tooltip {
   background: @mantle;
-  border: 2px solid @mauve;
-  border-radius: 16px;
-  padding: 6px 10px;
+  border: 1px solid @mauve;
+  border-radius: 5px;
+  margin: 8px;
+  padding: 10px;
 }
 
 tooltip label {
@@ -183,6 +184,7 @@ tooltip calendar:indeterminate {
   padding: 3px 10px;
 }
 
+#custom-updates,
 #custom-notification,
 #custom-lock,
 #custom-power {
@@ -192,9 +194,21 @@ tooltip calendar:indeterminate {
   border-radius: 0;
 }
 
-#custom-notification {
+#custom-updates {
   margin-left: 8px;
   border-radius: 16px 0 0 16px;
+  color: @overlay0;
+}
+
+#custom-updates.outdated {
+  color: @yellow;
+}
+
+#custom-updates.error {
+  color: @red;
+}
+
+#custom-notification {
   color: @lavender;
 }
 

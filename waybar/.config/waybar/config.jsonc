@@ -17,6 +17,7 @@
     "backlight",
     "battery",
     "clock",
+    "custom/updates",
     "custom/notification",
     "custom/lock",
     "custom/power",
@@ -74,6 +75,15 @@
     "exec": "vesktop-status out",
     "on-click": "vesktop-deafen",
     "tooltip": true,
+  },
+  "custom/updates": {
+    "interval": 60,
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "exec": "nix-update-waybar",
+    "on-click": "systemctl --user start nix-update-check.service",
+    "signal": 9,
   },
   "clock": {
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
