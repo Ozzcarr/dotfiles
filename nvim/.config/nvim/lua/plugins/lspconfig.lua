@@ -8,6 +8,7 @@ require('mason-tool-installer').setup({
     'lua-language-server',
     'typescript-language-server',
     'ruff',
+    'ty',
     'json-lsp',
     'yaml-language-server',
     'bash-language-server',
