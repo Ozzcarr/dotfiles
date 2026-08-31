@@ -14,7 +14,9 @@ require('mason-tool-installer').setup({
     'dockerfile-language-server',
     'docker-compose-language-service',
     'taplo',
+    'tinymist',
     'shfmt',
+    'typstyle',
   },
 })
 
@@ -44,6 +46,7 @@ vim.lsp.enable('bashls')
 vim.lsp.enable('dockerls')
 vim.lsp.enable('docker_compose_language_service')
 vim.lsp.enable('taplo')
+vim.lsp.enable('tinymist')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)

@@ -6,4 +6,8 @@ require('markview').setup({
   preview = {
     icon_provider = 'mini',
   },
+  typst = {
+    code_blocks = { enable = false },
+    code_spans = { enable = false },
+  },
 })

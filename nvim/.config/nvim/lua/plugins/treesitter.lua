@@ -10,6 +10,7 @@ local parsers = {
   'python',
   'markdown',
   'markdown_inline',
+  'typst',
   'json',
   'yaml',
   'toml',

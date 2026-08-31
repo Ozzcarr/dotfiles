@@ -13,6 +13,7 @@ require('conform').setup({
     css = { 'prettierd' },
     html = { 'prettierd' },
     markdown = { 'prettierd' },
+    typst = { 'typstyle' },
     yaml = { 'prettierd' },
     python = { 'ruff_format' },
     toml = { 'taplo' },
