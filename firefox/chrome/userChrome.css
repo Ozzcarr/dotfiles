@@ -1,0 +1,7 @@
+/* Toggled by Ctrl+Shift+H (see chrome/JS/toggle-media-chrome.sys.mjs).
+   Only affects the window the attribute is set on. */
+:root[uc-chrome-hidden] #TabsToolbar,
+:root[uc-chrome-hidden] #nav-bar,
+:root[uc-chrome-hidden] #sidebar-container {
+  visibility: collapse !important;
+}
