@@ -60,7 +60,8 @@ alias -- c=clear
 alias -- cat=bat
 alias -- eza='eza --icons auto --git --group-directories-first --no-quotes --header --git-ignore '\''--icons=always'\'' --classify --hyperlink'
 alias -- fr='nh os switch --hostname desktop'
-alias -- fu='nh os switch --hostname desktop --update'
+alias -- fus='nh os switch --hostname desktop --update'
+alias -- fub='nh os boot --hostname desktop --update'
 alias -- hr='nh home switch --configuration oscar@desktop /home/oscar/nix-config'
 alias -- la='eza -lah '
 alias -- ll='eza  -lh --no-user --long'
