@@ -42,6 +42,13 @@ require('snacks').setup({
     },
   },
   bigfile = {},
+  image = {
+    convert = {
+      magick = {
+        pdf = { '-density', 192, '{src}[{page}]', '-background', 'white', '-alpha', 'remove' },
+      },
+    },
+  },
   indent = {},
   input = {},
   notifier = {},
