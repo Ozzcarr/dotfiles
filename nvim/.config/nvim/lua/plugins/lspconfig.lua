@@ -37,10 +37,21 @@ vim.lsp.config('nixd', {
   },
 })
 
+-- nvim-lint owns Python diagnostics. Ruff's LSP stays only for <leader>co's organize-imports action, with its own diagnostics off so they don't compete.
+vim.lsp.config('ruff', {
+  -- Ruff reads settings from init_options, not the regular `settings` field.
+  init_options = {
+    settings = {
+      lint = { enable = false },
+    },
+  },
+})
+
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('nixd')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('ty')
+vim.lsp.enable('ruff')
 vim.lsp.enable('jsonls')
 vim.lsp.enable('yamlls')
 vim.lsp.enable('bashls')
@@ -54,6 +65,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client and client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+    end
+  end,
+})
+
+-- ruff doesn't pick up pyproject.toml/ruff.toml edits on its own, hence the restart.
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = { 'pyproject.toml', 'ruff.toml', '.ruff.toml' },
+  callback = function()
+    if #vim.lsp.get_clients({ name = 'ruff' }) > 0 then
+      vim.cmd('lsp restart ruff')
     end
   end,
 })
