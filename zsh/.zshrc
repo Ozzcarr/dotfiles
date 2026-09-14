@@ -64,7 +64,7 @@ alias -- fus='nh os switch --hostname desktop --update'
 alias -- fub='nh os boot --hostname desktop --update'
 alias -- hr='nh home switch --configuration oscar@desktop /home/oscar/nix-config'
 alias -- la='eza -lah '
-alias -- ll='eza  -lh --no-user --long'
+alias -- ll='eza -lh --no-user --long'
 alias -- lla='eza -la'
 alias -- ls=eza
 alias -- lt='eza --tree --level=2'
