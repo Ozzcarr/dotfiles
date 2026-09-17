@@ -1,0 +1,50 @@
+:root {
+  --accent-blue: #cba6f7 !important;
+  --accent-blue10: rgba(203, 166, 247, 0.1) !important;
+  --accent-blue30: rgba(203, 166, 247, 0.3) !important;
+  --accent-blue50: rgba(203, 166, 247, 0.5) !important;
+  --accent-azure: #89dceb !important;
+  --accent-gold: #fab387 !important;
+  --accent-green: #a6e3a1 !important;
+  --accent-orange: #fab387 !important;
+  --accent-red: #f38ba8 !important;
+  --accent-teal: #94e2d5 !important;
+  --accent-yellow: #f9e2af !important;
+  --accent-highlight: rgba(249, 226, 175, 0.15) !important;
+
+  --fill-primary: rgba(205, 214, 244, 0.9) !important;
+  --fill-secondary: rgba(205, 214, 244, 0.55) !important;
+  --fill-tertiary: rgba(205, 214, 244, 0.3) !important;
+  --fill-quarternary: rgba(205, 214, 244, 0.12) !important;
+  --fill-quinary: rgba(205, 214, 244, 0.06) !important;
+  --fill-senary: rgba(205, 214, 244, 0.03) !important;
+
+  --color-background: #1e1e2e !important;
+  --color-background30: rgba(30, 30, 46, 0.3) !important;
+  --color-background50: rgba(30, 30, 46, 0.5) !important;
+  --color-background70: rgba(30, 30, 46, 0.7) !important;
+
+  --color-border: rgba(108, 112, 134, 0.35) !important;
+  --color-border50: rgba(108, 112, 134, 0.18) !important;
+
+  --color-button: #45475a !important;
+  --color-control: #bac2de !important;
+  --color-menu: rgba(24, 24, 37, 0.85) !important;
+  --color-menu-opaque: #181825 !important;
+  --color-panedivider: #45475a !important;
+  --color-sidepane: #181825 !important;
+  --color-tabbar: #11111b !important;
+  --color-toolbar: #181825 !important;
+
+  --color-scrollbar: #6c7086 !important;
+  --color-scrollbar-hover: #7f849c !important;
+  --color-scrollbar-background: transparent !important;
+
+  --color-stripe: rgba(205, 214, 244, 0.04) !important;
+  --color-stripe-on-background: #181825 !important;
+
+  --color-quinary-on-background: #313244 !important;
+  --color-quarternary-on-background: #45475a !important;
+  --color-quinary-on-sidepane: #45475a !important;
+  --color-quarternary-on-sidepane: #585b70 !important;
+}
