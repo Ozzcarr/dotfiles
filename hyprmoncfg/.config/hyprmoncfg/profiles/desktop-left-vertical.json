@@ -1,7 +1,7 @@
 {
   "name": "Desktop Left Vertical",
   "created_at": "2026-09-22T19:36:41.813766359Z",
-  "updated_at": "2026-09-22T19:41:55.328163719Z",
+  "updated_at": "2026-09-22T23:05:09.929309337Z",
   "outputs": [
     {
       "key": "ancor communications inc|vg248|f3lmqs027757",
@@ -31,7 +31,7 @@
     {
       "key": "microstep|msi g273q|ca8a641300127",
       "match_key": "microstep|msi g273q|ca8a641300127",
-      "name": "DP-2",
+      "name": "DP-1",
       "description": "Microstep MSI G273Q CA8A641300127",
       "make": "Microstep",
       "model": "MSI G273Q",
@@ -67,27 +67,27 @@
       {
         "workspace": "1",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-2"
+        "output_name": "DP-1"
       },
       {
         "workspace": "2",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-2"
+        "output_name": "DP-1"
       },
       {
         "workspace": "3",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-2"
+        "output_name": "DP-1"
       },
       {
         "workspace": "4",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-2"
+        "output_name": "DP-1"
       },
       {
         "workspace": "5",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-2"
+        "output_name": "DP-1"
       },
       {
         "workspace": "6",
