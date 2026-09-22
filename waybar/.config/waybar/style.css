@@ -178,7 +178,6 @@ tooltip calendar:indeterminate {
   color: @blue;
 }
 
-#tray,
 #network,
 #bluetooth {
   background-color: @base;
@@ -187,18 +186,21 @@ tooltip calendar:indeterminate {
   border-radius: 0;
 }
 
-#tray {
+#network {
   margin-left: 8px;
   border-radius: 16px 0 0 16px;
-}
-
-#network {
   font-size: 16px;
   color: @text;
 }
 
 #network.disconnected {
   color: @red;
+}
+
+#tray {
+  background-color: @base;
+  margin: 3px 0 3px 8px;
+  padding: 3px 9px;
 }
 
 #bluetooth {
