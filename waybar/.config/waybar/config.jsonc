@@ -14,6 +14,8 @@
   "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "tray",
+    "network",
+    "bluetooth",
     "backlight",
     "battery",
     "clock",
@@ -112,7 +114,26 @@
     "format-icons": {
       "default": ["", "", " "],
     },
-    "on-click": "pavucontrol",
+    "on-click": "$HOME/dotfiles/hyprland/.config/hypr/float-tui.sh wiremix wiremix",
+  },
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰪎",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)  {ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}  {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "$HOME/dotfiles/hyprland/.config/hypr/float-tui.sh impala impala",
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {device_alias}",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "$HOME/dotfiles/hyprland/.config/hypr/float-tui.sh bluetui bluetui",
   },
   "custom/notification": {
     "tooltip": false,

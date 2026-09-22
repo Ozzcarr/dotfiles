@@ -1,0 +1,132 @@
+{
+  "name": "Desktop Left Vertical",
+  "created_at": "2026-09-22T19:36:41.813766359Z",
+  "updated_at": "2026-09-22T19:41:55.328163719Z",
+  "outputs": [
+    {
+      "key": "ancor communications inc|vg248|f3lmqs027757",
+      "match_key": "ancor communications inc|vg248|f3lmqs027757",
+      "name": "HDMI-A-1",
+      "description": "Ancor Communications Inc VG248 F3LMQS027757",
+      "make": "Ancor Communications Inc",
+      "model": "VG248",
+      "serial": "F3LMQS027757",
+      "enabled": true,
+      "mode": "1920x1080@60.00Hz",
+      "width": 1920,
+      "height": 1080,
+      "refresh": 60,
+      "x": 0,
+      "y": 0,
+      "scale": 1,
+      "transform": 1,
+      "bitdepth": 8,
+      "cm": "srgb",
+      "sdr_brightness": 1,
+      "sdr_saturation": 1,
+      "sdr_min_luminance": 0.2,
+      "sdr_max_luminance": 80,
+      "min_luminance": 0
+    },
+    {
+      "key": "microstep|msi g273q|ca8a641300127",
+      "match_key": "microstep|msi g273q|ca8a641300127",
+      "name": "DP-2",
+      "description": "Microstep MSI G273Q CA8A641300127",
+      "make": "Microstep",
+      "model": "MSI G273Q",
+      "serial": "CA8A641300127",
+      "enabled": true,
+      "mode": "2560x1440@164.84Hz",
+      "width": 2560,
+      "height": 1440,
+      "refresh": 164.84,
+      "x": 1080,
+      "y": 100,
+      "scale": 1,
+      "transform": 0,
+      "bitdepth": 8,
+      "cm": "srgb",
+      "sdr_brightness": 1,
+      "sdr_saturation": 1,
+      "sdr_min_luminance": 0.2,
+      "sdr_max_luminance": 80,
+      "min_luminance": 0
+    }
+  ],
+  "workspaces": {
+    "enabled": true,
+    "strategy": "manual",
+    "max_workspaces": 9,
+    "group_size": 3,
+    "monitor_order": [
+      "microstep|msi g273q|ca8a641300127",
+      "ancor communications inc|vg248|f3lmqs027757"
+    ],
+    "rules": [
+      {
+        "workspace": "1",
+        "output_key": "microstep|msi g273q|ca8a641300127",
+        "output_name": "DP-2"
+      },
+      {
+        "workspace": "2",
+        "output_key": "microstep|msi g273q|ca8a641300127",
+        "output_name": "DP-2"
+      },
+      {
+        "workspace": "3",
+        "output_key": "microstep|msi g273q|ca8a641300127",
+        "output_name": "DP-2"
+      },
+      {
+        "workspace": "4",
+        "output_key": "microstep|msi g273q|ca8a641300127",
+        "output_name": "DP-2"
+      },
+      {
+        "workspace": "5",
+        "output_key": "microstep|msi g273q|ca8a641300127",
+        "output_name": "DP-2"
+      },
+      {
+        "workspace": "6",
+        "output_key": "ancor communications inc|vg248|f3lmqs027757",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "7",
+        "output_key": "ancor communications inc|vg248|f3lmqs027757",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "8",
+        "output_key": "ancor communications inc|vg248|f3lmqs027757",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "9",
+        "output_key": "ancor communications inc|vg248|f3lmqs027757",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "10",
+        "output_key": "ancor communications inc|vg248|f3lmqs027757",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "special:gamestore",
+        "output_key": ""
+      },
+      {
+        "workspace": "special:obs",
+        "output_key": ""
+      },
+      {
+        "workspace": "special:spotify",
+        "output_key": ""
+      }
+    ]
+  },
+  "exec": ""
+}
