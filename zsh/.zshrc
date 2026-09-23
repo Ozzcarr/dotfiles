@@ -13,6 +13,7 @@ clone_if_missing "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" https://github.co
 typeset -U path cdpath fpath manpath
 
 DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_TITLE="true"
 ZSH_THEME=""
 
 ZSH_AUTOSUGGEST_STRATEGY=(history)

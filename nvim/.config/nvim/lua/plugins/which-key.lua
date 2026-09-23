@@ -15,6 +15,7 @@ require('which-key').add({
   { '<leader>f', group = 'Find' },
   { '<leader>g', group = 'Git' },
   { '<leader>m', desc = 'Mason', icon = { icon = '', color = 'orange' } },
+  { '<leader>q', group = 'Session', icon = { icon = '󰆓', color = 'green' } },
   { '<leader>u', group = 'UI' },
   { '<leader>w', group = 'Window' },
   { '<leader>x', group = 'Diagnostics' },

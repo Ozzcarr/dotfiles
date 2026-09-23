@@ -1,0 +1,10 @@
+session_name: system
+windows:
+  - window_name: nix-config
+    start_directory: ~/nix-config
+    panes:
+      - nvim
+  - window_name: dotfiles
+    start_directory: ~/dotfiles
+    panes:
+      - nvim
