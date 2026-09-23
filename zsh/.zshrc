@@ -60,11 +60,6 @@ alias -- .....='cd ../../../..'
 alias -- c=clear
 alias -- cat=bat
 alias -- eza='eza --icons auto --git --group-directories-first --no-quotes --header --git-ignore '\''--icons=always'\'' --classify --hyperlink'
-alias -- frs='nh os switch --hostname desktop'
-alias -- frb='nh os boot --hostname desktop'
-alias -- fus='nh os switch --hostname desktop --update'
-alias -- fub='nh os boot --hostname desktop --update'
-alias -- hr='nh home switch --configuration oscar@desktop /home/oscar/nix-config'
 alias -- la='eza -lah '
 alias -- ll='eza -lh --no-user --long'
 alias -- lla='eza -la'
@@ -74,3 +69,9 @@ alias -- lta='eza -a --tree --level=2'
 alias -- man=batman
 alias -- ncg='nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot'
 alias -- tree='eza --tree '
+
+frs() { nh os switch --hostname "$(hostname)" "$@" }
+frb() { nh os boot --hostname "$(hostname)" "$@" }
+fus() { nh os switch --hostname "$(hostname)" --update "$@" }
+fub() { nh os boot --hostname "$(hostname)" --update "$@" }
+hr() { nh home switch --configuration "oscar@$(hostname)" /home/oscar/nix-config "$@" }
