@@ -204,7 +204,6 @@ tooltip calendar:indeterminate {
 }
 
 #bluetooth {
-  padding-right: 16px;
   border-radius: 0 16px 16px 0;
   font-size: 16px;
   color: @text;
