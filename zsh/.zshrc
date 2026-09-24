@@ -69,6 +69,7 @@ alias -- lta='eza -a --tree --level=2'
 alias -- man=batman
 alias -- ncg='nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot'
 alias -- tree='eza --tree '
+alias -- rb='nh os rollback'
 
 frs() { nh os switch --hostname "$(hostname)" "$@" }
 frb() { nh os boot --hostname "$(hostname)" "$@" }
