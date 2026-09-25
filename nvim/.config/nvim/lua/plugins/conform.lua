@@ -17,6 +17,7 @@ require('conform').setup({
     yaml = { 'prettierd' },
     python = { 'ruff_format' },
     toml = { 'taplo' },
+    rust = { 'rustfmt' },
     sh = { 'shfmt' },
     bash = { 'shfmt' },
   },
