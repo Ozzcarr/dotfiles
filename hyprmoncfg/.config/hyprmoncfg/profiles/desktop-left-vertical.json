@@ -67,7 +67,9 @@
       {
         "workspace": "1",
         "output_key": "microstep|msi g273q|ca8a641300127",
-        "output_name": "DP-1"
+        "output_name": "DP-1",
+        "default": true,
+        "persistent": true
       },
       {
         "workspace": "2",
@@ -92,7 +94,9 @@
       {
         "workspace": "6",
         "output_key": "ancor communications inc|vg248|f3lmqs027757",
-        "output_name": "HDMI-A-1"
+        "output_name": "HDMI-A-1",
+        "default": true,
+        "persistent": true
       },
       {
         "workspace": "7",

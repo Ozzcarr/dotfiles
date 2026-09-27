@@ -19,12 +19,12 @@ hl.monitor({
   sdr_max_luminance = 80,
 })
 
-hl.workspace_rule({ workspace = "1", monitor = "desc:Microstep MSI G273Q CA8A641300127" })
+hl.workspace_rule({ workspace = "1", monitor = "desc:Microstep MSI G273Q CA8A641300127", default = true, persistent = true })
 hl.workspace_rule({ workspace = "2", monitor = "desc:Microstep MSI G273Q CA8A641300127" })
 hl.workspace_rule({ workspace = "3", monitor = "desc:Microstep MSI G273Q CA8A641300127" })
 hl.workspace_rule({ workspace = "4", monitor = "desc:Microstep MSI G273Q CA8A641300127" })
 hl.workspace_rule({ workspace = "5", monitor = "desc:Microstep MSI G273Q CA8A641300127" })
-hl.workspace_rule({ workspace = "6", monitor = "desc:Ancor Communications Inc VG248 F3LMQS027757" })
+hl.workspace_rule({ workspace = "6", monitor = "desc:Ancor Communications Inc VG248 F3LMQS027757", default = true, persistent = true })
 hl.workspace_rule({ workspace = "7", monitor = "desc:Ancor Communications Inc VG248 F3LMQS027757" })
 hl.workspace_rule({ workspace = "8", monitor = "desc:Ancor Communications Inc VG248 F3LMQS027757" })
 hl.workspace_rule({ workspace = "9", monitor = "desc:Ancor Communications Inc VG248 F3LMQS027757" })
