@@ -47,7 +47,7 @@ hl.bind(mod .. " + SHIFT + N", exec(hypr_dir .. "/night-light.sh"))
 hl.bind(mod .. " + B", exec("wallpaper"))
 hl.bind(mod .. " + C", exec("hyprpicker -a"))
 hl.bind(mod .. " + V", exec("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
-hl.bind(mod .. " + SHIFT + R", exec("killall -q waybar; sleep .5 && waybar"))
+hl.bind(mod .. " + SHIFT + R", exec("pkill waybar; sleep .5; exec waybar"))
 
 hl.bind(mod .. " + S", screenshot("region"))
 hl.bind(mod .. " + SHIFT + S", screenshot("window"))

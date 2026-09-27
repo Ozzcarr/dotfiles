@@ -1,7 +1,7 @@
 local hypr_dir = os.getenv("HOME") .. "/dotfiles/hyprland/.config/hypr"
 
 local function restart(process, cmd)
-  hl.exec_cmd(("killall -q %s; sleep .5 && %s"):format(process, cmd or process))
+  hl.exec_cmd(("pkill %s; sleep .5; exec %s"):format(process, cmd or process))
 end
 
 hl.on("hyprland.start", function()
