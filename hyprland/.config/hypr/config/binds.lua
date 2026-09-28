@@ -53,6 +53,8 @@ hl.bind(mod .. " + S", screenshot("region"))
 hl.bind(mod .. " + SHIFT + S", screenshot("window"))
 hl.bind(mod .. " + CTRL + S", screenshot("output"))
 
+hl.bind(mod .. " + SHIFT + V", exec("noise-mode toggle"))
+
 hl.bind(mod .. " + SHIFT + M", exec("vesktop-mute"))
 hl.bind(mod .. " + SHIFT + D", exec("vesktop-deafen"))
 
