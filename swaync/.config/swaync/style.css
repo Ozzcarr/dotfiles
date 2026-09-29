@@ -1,0 +1,364 @@
+@import "mocha.css";
+
+* {
+  font-family: JetBrainsMono Nerd Font Mono;
+  font-weight: bold;
+}
+
+/* Every ancestor of .notification has to stay transparent, otherwise the
+   GTK theme paints a square card behind the rounded border and its
+   corners stick out around it. */
+.notification-row,
+.notification-row:focus,
+.notification-row:hover,
+.notification-row:selected,
+.notification-row:active,
+.notification-row .notification-background,
+.control-center .notification-row,
+.control-center .notification-row .notification-background,
+.control-center-list row,
+.control-center-list row:focus,
+.control-center-list row:hover,
+.control-center-list row:selected,
+.control-center-list row:active {
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* spacing between stacked notifications */
+.notification-row .notification-background {
+  padding: 5px 10px;
+}
+
+/* the card itself: background, border and radius all on one node */
+.notification-row .notification-background .notification {
+  background: @base;
+  border: 2px solid @mauve;
+  border-radius: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.control-center .notification-row:focus .notification-background .notification,
+.control-center .notification-row:hover .notification-background .notification {
+  background: @mantle;
+}
+
+.floating-notifications .notification-row .notification-background .notification {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+}
+
+/* the large clickable area holding summary and body */
+.notification-row .notification-background .notification .notification-default-action {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: @text;
+  margin: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  background: @surface0;
+}
+
+/* when action buttons are shown this is no longer the bottom of the card */
+.notification-row .notification-background .notification .notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* action buttons sit flush inside the card, split by dividers */
+.notification-action {
+  background: transparent;
+  color: @text;
+  border: none;
+  border-top: 2px solid @mauve;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 6px;
+}
+
+.notification-action:not(:first-child) {
+  border-left: 2px solid @mauve;
+}
+
+.notification-action:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.notification-action:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.notification-action:hover {
+  background: @mauve;
+  color: @base;
+}
+
+/* each action wraps an inner themed button node - flatten that too */
+.notification-action > *,
+.notification-action > *:hover,
+.notification-action > *:active {
+  background: transparent;
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.close-button {
+  background: @red;
+  color: @base;
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  border-radius: 8px;
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+.close-button:hover {
+  background: @mauve;
+  box-shadow: none;
+  border: none;
+  transition: all .15s ease-in-out;
+}
+
+/* line-height gives ascenders (l, f, h) room so they are not clipped,
+   and 17px renders their tops properly at this font */
+.summary {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  background: transparent;
+  color: @mauve;
+  text-shadow: none;
+}
+
+.time {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  background: transparent;
+  color: @text;
+  text-shadow: none;
+  margin-right: 24px;
+}
+
+.body {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+  background: transparent;
+  color: @text;
+  text-shadow: none;
+}
+
+.notification-content .text-box label {
+  filter: none;
+}
+
+.body-image {
+  margin-top: 6px;
+  background-color: @text;
+  border-radius: 8px;
+}
+
+.inline-reply {
+  margin-top: 8px;
+}
+
+.inline-reply-entry {
+  background: @base;
+  color: @text;
+  caret-color: @text;
+  border: 1px solid @peach;
+  border-radius: 8px;
+}
+
+.inline-reply-button {
+  margin-left: 4px;
+  background: @base;
+  border: 1px solid @peach;
+  border-radius: 8px;
+  color: @text;
+}
+
+.inline-reply-button:disabled {
+  background: initial;
+  color: @surface1;
+  border: 1px solid transparent;
+}
+
+.inline-reply-button:hover {
+  background: @surface0;
+}
+
+.control-center {
+  background: @base;
+  border: 2px solid @mauve;
+  border-radius: 12px;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  opacity: .5;
+}
+
+.floating-notifications {
+  background: transparent;
+}
+
+.blank-window {
+  background: alpha(black, 0);
+}
+
+.widget-title {
+  color: @mauve;
+  background: @base;
+  padding: 5px 10px;
+  margin: 10px 10px 5px 10px;
+  font-size: 1.5rem;
+  border-radius: 8px;
+}
+
+.widget-title>button {
+  font-size: 1rem;
+  color: @text;
+  text-shadow: none;
+  background: @base;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.widget-title>button:hover {
+  background: @red;
+  color: @base;
+}
+
+.widget-dnd {
+  background: @base;
+  padding: 5px 10px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 8px;
+  font-size: large;
+  color: @mauve;
+}
+
+.widget-dnd>switch {
+  border-radius: 8px;
+  background: @mauve;
+}
+
+.widget-dnd>switch:checked {
+  background: @red;
+  border: 1px solid @red;
+}
+
+.widget-dnd>switch slider {
+  background: @base;
+  border-radius: 8px;
+}
+
+.widget-dnd>switch:checked slider {
+  background: @base;
+  border-radius: 8px;
+}
+
+.widget-label {
+  margin: 10px 10px 5px 10px;
+}
+
+.widget-label>label {
+  font-size: 1rem;
+  color: @text;
+}
+
+.widget-mpris {
+  color: @text;
+  padding: 5px 10px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 8px;
+}
+
+.widget-mpris > box > button {
+  border-radius: 8px;
+}
+
+.widget-mpris-player {
+  padding: 5px 10px;
+  margin: 10px;
+}
+
+.widget-mpris-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.widget-mpris-subtitle {
+  font-size: 1.1rem;
+}
+
+.widget-menubar>box>.menu-button-bar>button {
+  border: none;
+  background: transparent;
+}
+
+.topbar-buttons>button {
+  border: none;
+  background: transparent;
+}
+
+.widget-volume {
+  background: @mantle;
+  padding: 5px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 8px;
+  font-size: x-large;
+  color: @text;
+}
+
+.widget-volume>box>button {
+  background: @mauve;
+  border: none;
+}
+
+.per-app-volume {
+  background-color: @base;
+  padding: 4px 8px 8px;
+  margin: 0 8px 8px;
+  border-radius: 8px;
+}
+
+.widget-backlight {
+  background: @mantle;
+  padding: 5px;
+  margin: 10px 10px 5px 10px;
+  border-radius: 8px;
+  font-size: x-large;
+  color: @text;
+}

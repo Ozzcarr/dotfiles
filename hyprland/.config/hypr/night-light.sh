@@ -5,7 +5,7 @@ set -euo pipefail
 here=$(dirname "$(readlink -f "$0")")
 
 notify() {
-  notify-send -h boolean:transient:true -i "$here/night-light-$1.svg" \
+  notify-send -u low -h boolean:transient:true -i "$here/night-light-$1.svg" \
     "Night light" "$2"
 }
 

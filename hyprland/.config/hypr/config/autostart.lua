@@ -16,7 +16,6 @@ hl.on("hyprland.start", function()
   restart("hyprsunset")
   restart("awww-daemon")
   restart("waybar")
-  restart("swaync")
 
   hl.exec_cmd(hypr_dir .. "/steam-friends-tile.sh")
 
