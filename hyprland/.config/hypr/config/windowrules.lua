@@ -52,7 +52,6 @@ hl.window_rule({
 })
 
 hl.window_rule({ name = "mpv-float", match = { class = [[^(mpv)$]] }, float = true })
-hl.window_rule({ name = "waypaper-float", match = { class = [[^([Ww]aypaper)$]] }, float = true })
 
 hl.window_rule({
   name = "polkit-float",
