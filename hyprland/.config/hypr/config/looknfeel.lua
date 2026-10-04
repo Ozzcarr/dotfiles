@@ -1,24 +1,60 @@
+local scheme = require("generated.scheme")
+
+-- Mirrored in quickshell/.config/quickshell/oz/config/Tokens.qml (marked SHARED).
+local frame = {
+  thickness = 4,
+  pod = 26,
+  gap = 6,
+  window_radius = 14,
+}
+
+local function rgb(hex)
+  return ("rgb(%s)"):format(hex:sub(2))
+end
+
+local function rgba(hex, alpha)
+  return ("rgba(%s%02x)"):format(hex:sub(2), math.floor(alpha * 255 + 0.5))
+end
+
 hl.config({
   general = {
     layout = "dwindle",
 
-    gaps_in = 4,
-    gaps_out = { top = 3, right = 8, bottom = 8, left = 8 },
+    -- The shell's frame is drawn inside gaps_out.
+    gaps_in = frame.gap / 2,
+    gaps_out = {
+      top = frame.pod + frame.gap,
+      right = frame.thickness + frame.gap,
+      bottom = frame.thickness + frame.gap,
+      left = frame.thickness + frame.gap,
+    },
 
+    border_size = 2,
+
+    -- The shell replaces active_border with the wallpaper accent at runtime.
     col = {
-      active_border = "rgb(cba6f7)", -- mauve
-      inactive_border = "rgb(181825)", -- mantle
+      active_border = { colors = { rgb(scheme.base0E), rgb(scheme.base0D) }, angle = 45 },
+      inactive_border = rgb(scheme.base02),
     },
 
     resize_on_border = true,
   },
 
   decoration = {
-    rounding = 5,
+    rounding = frame.window_radius,
+
+    shadow = {
+      enabled = true,
+      range = 24,
+      render_power = 3,
+      color = rgba(scheme.base01, 0.63),
+    },
 
     blur = {
-      size = 5,
+      enabled = true,
+      size = 6,
       passes = 3,
+      new_optimizations = true,
       ignore_opacity = false,
     },
   },
@@ -29,13 +65,18 @@ hl.config({
   },
 })
 
-hl.curve("snappy", { type = "bezier", points = { { 0.25, 1 }, { 0.5, 1 } } })
+-- Same curve as Tokens.motion.bezier.
+hl.curve("standard", { type = "bezier", points = { { 0.2, 0.0 }, { 0.0, 1.0 } } })
 
-hl.animation({ leaf = "global", enabled = true, speed = 1.5, bezier = "snappy" })
+hl.animation({ leaf = "global", enabled = true, speed = 1.5, bezier = "standard" })
 hl.animation({
   leaf = "specialWorkspace",
   enabled = true,
   speed = 1.5,
-  bezier = "snappy",
+  bezier = "standard",
   style = "slidefadevert",
 })
+
+-- ignore_alpha keeps the blur to the frame itself, not the transparent rest of the surface.
+hl.layer_rule({ name = "shell-blur", match = { namespace = "quickshell-.*" }, blur = true })
+hl.layer_rule({ name = "shell-ignore-alpha", match = { namespace = "quickshell-.*" }, ignore_alpha = 0.4 })

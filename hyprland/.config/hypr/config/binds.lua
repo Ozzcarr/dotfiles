@@ -1,132 +1,174 @@
+-- SUPER goes to or opens things, SHIFT takes the window along (or is the
+-- stronger variant), CTRL reshapes, ALT is system. Every bind carries a
+-- description, which is what the cheatsheet lists.
+
 local mod = "SUPER"
 local hypr_dir = os.getenv("HOME") .. "/dotfiles/hyprland/.config/hypr"
 
 local terminal = "kitty"
-local browser = "firefox"
-local editor = "code"
-local file_manager = "thunar"
-local launcher = [[rofi -show drun -modi "drun,calc" -calc-command "echo -n '{result}' | wl-copy"]]
+
+local function bind(keys, action, description, opts)
+  opts = opts or {}
+  opts.description = description
+  hl.bind(keys, action, opts)
+end
 
 local function exec(cmd)
   return hl.dsp.exec_cmd(cmd)
 end
 
--- Without remember_window_size=no kitty flashes at its last size first.
+local function launcher(mode)
+  return exec("qs -c oz ipc call launcher toggle " .. mode)
+end
+
 local function float_tui(tool)
-  return exec(("%s -o remember_window_size=no --title %s -e %s"):format(terminal, tool, tool))
+  return exec(("%s --title %s -e %s"):format(terminal, tool, tool))
 end
 
-local function screenshot(mode)
-  return exec(("hyprshot -m %s -o $HOME/Pictures/Screenshots"):format(mode))
+-- Jumps to the most recently used window of the class, or launches it.
+local function focus_or_launch(class, cmd)
+  return function()
+    local best
+    for _, w in ipairs(hl.get_windows()) do
+      if w.class:lower() == class and (not best or w.focus_history_id < best.focus_history_id) then
+        best = w
+      end
+    end
+    if best then
+      hl.dispatch(hl.dsp.focus({ window = "address:" .. best.address }))
+    else
+      hl.dispatch(exec(cmd))
+    end
+  end
 end
 
--- Applications
+-- Apps
 
-hl.bind(mod .. " + Return", exec(terminal))
-hl.bind(mod .. " + SPACE", exec(launcher))
-hl.bind(mod .. " + W", exec(browser))
-hl.bind(mod .. " + SHIFT + W", exec(browser .. " --private-window"))
-hl.bind(mod .. " + E", exec(editor))
-hl.bind(mod .. " + T", exec(file_manager))
-hl.bind(mod .. " + Y", exec(terminal .. " -e yazi"))
-hl.bind(mod .. " + D", exec("vesktop"))
+bind(mod .. " + Return", exec(terminal), "Terminal")
+bind(mod .. " + SPACE", launcher("apps"), "Launcher")
 
-hl.bind(mod .. " + SHIFT + A", float_tui("wiremix"))
-hl.bind(mod .. " + SHIFT + I", float_tui("impala"))
-hl.bind(mod .. " + SHIFT + B", float_tui("bluetui"))
-hl.bind(mod .. " + SHIFT + O", float_tui("hyprmoncfg"))
+bind(mod .. " + W", focus_or_launch("firefox", "firefox"), "Firefox")
+bind(mod .. " + SHIFT + W", exec("firefox --private-window"), "Private Firefox window")
+bind(mod .. " + CTRL + W", exec("firefox --new-window"), "New Firefox window")
+bind(mod .. " + E", focus_or_launch("code", "code"), "Editor")
+bind(mod .. " + CTRL + E", exec("code --new-window"), "New editor window")
+bind(mod .. " + T", focus_or_launch("thunar", "thunar"), "Files")
+bind(mod .. " + CTRL + T", exec("thunar"), "New files window")
+bind(mod .. " + D", focus_or_launch("vesktop", "vesktop"), "Vesktop")
+bind(mod .. " + Y", exec(terminal .. " -e yazi"), "yazi")
 
--- Session and utilities
+-- Shell
 
-hl.bind(mod .. " + escape", exec("hyprlock"))
-hl.bind(mod .. " + SHIFT + escape", exec("wlogout"))
-hl.bind(mod .. " + SHIFT + C", hl.dsp.exit())
+bind(mod .. " + Tab", exec("qs -c oz ipc call dashboard toggle"), "Dashboard")
+bind(mod .. " + N", exec("swaync-client -t -sw"), "Notification center")
+bind(mod .. " + SHIFT + N", exec("swaync-client -C"), "Dismiss all notifications")
+bind(mod .. " + V", launcher("clipboard"), "Clipboard history")
+bind(mod .. " + C", exec("hyprpicker -a"), "Color picker")
+bind(mod .. " + B", exec("wallpaper"), "Wallpaper")
 
-hl.bind(mod .. " + N", exec("swaync-client -t -sw"))
-hl.bind(mod .. " + SHIFT + N", exec(hypr_dir .. "/night-light.sh"))
-hl.bind(mod .. " + B", exec("wallpaper"))
-hl.bind(mod .. " + C", exec("hyprpicker -a"))
-hl.bind(mod .. " + V", exec("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
-hl.bind(mod .. " + SHIFT + R", exec("pkill waybar; sleep .5; exec waybar"))
+bind(mod .. " + S", exec("hyprshot -m region -o $HOME/Pictures/Screenshots"), "Screenshot a region")
+bind(mod .. " + SHIFT + S", exec("hyprshot -m region --clipboard-only"), "Screenshot a region to the clipboard")
 
-hl.bind(mod .. " + S", screenshot("region"))
-hl.bind(mod .. " + SHIFT + S", screenshot("window"))
-hl.bind(mod .. " + CTRL + S", screenshot("output"))
+-- System
 
-hl.bind(mod .. " + SHIFT + V", exec("noise-mode toggle"))
+bind(mod .. " + ALT + A", float_tui("wiremix"), "Audio")
+bind(mod .. " + ALT + W", float_tui("impala"), "Wi-Fi")
+bind(mod .. " + ALT + B", float_tui("bluetui"), "Bluetooth")
+bind(mod .. " + ALT + D", float_tui("hyprmoncfg"), "Displays")
 
-hl.bind(mod .. " + SHIFT + M", exec("vesktop-mute"))
-hl.bind(mod .. " + SHIFT + D", exec("vesktop-deafen"))
+bind(mod .. " + ALT + M", exec("vesktop-mute"), "Vesktop: mute mic")
+bind(mod .. " + ALT + SHIFT + M", exec("vesktop-deafen"), "Vesktop: deafen")
+bind(mod .. " + ALT + N", exec(hypr_dir .. "/night-light.sh"), "Night light")
+bind(mod .. " + ALT + V", exec("noise-mode toggle"), "Noise mode")
+bind(mod .. " + ALT + I", exec(hypr_dir .. "/keep-awake.sh"), "Keep awake")
+bind(mod .. " + ALT + SPACE", launcher("system"), "System menu")
+bind(mod .. " + ALT + K", launcher("binds"), "Keybind cheatsheet")
+bind(mod .. " + ALT + R", exec("qs -c oz ipc call shell reload"), "Reload shell")
+
+bind(mod .. " + ALT + L", exec("hyprlock"), "Lock")
+bind(mod .. " + ALT + P", exec("wlogout"), "Power menu")
 
 -- Windows
 
-hl.bind(mod .. " + Q", hl.dsp.window.close())
-hl.bind(mod .. " + SHIFT + Q", exec([[hyprctl activewindow | awk '$1=="pid:"{print $2}' | xargs -r kill]]))
+bind(mod .. " + Q", hl.dsp.window.close(), "Close window")
+bind(mod .. " + SHIFT + Q", exec([[hyprctl activewindow | awk '$1=="pid:"{print $2}' | xargs -r kill]]), "Kill window")
 
-hl.bind(mod .. " + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "fullscreen" }))
-hl.bind(mod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mod .. " + I", hl.dsp.layout("togglesplit"))
+bind(mod .. " + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "fullscreen" }), "Fullscreen")
+bind(mod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }), "Toggle floating")
+bind(mod .. " + CTRL + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }), "Maximize")
+bind(mod .. " + I", hl.dsp.layout("togglesplit"), "Toggle split")
+bind(mod .. " + P", hl.dsp.window.pin({ action = "toggle" }), "Pin floating window")
 
-hl.bind("ALT + Tab", function()
-  hl.dispatch(hl.dsp.window.cycle_next())
-  hl.dispatch(hl.dsp.window.bring_to_top())
-end)
-
-hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+bind(mod .. " + mouse:272", hl.dsp.window.drag(), "Move window", { mouse = true })
+bind(mod .. " + mouse:273", hl.dsp.window.resize(), "Resize window", { mouse = true })
+bind(mod .. " + mouse:274", hl.dsp.window.float({ action = "toggle" }), "Toggle floating")
 
 -- Swap is bound by keycode so it survives a layout change.
 local directions = {
-  { name = "left", key = "h", code = 43, arrow = "left", resize = { -60, 0 } },
-  { name = "down", key = "j", code = 44, arrow = "down", resize = { 0, 60 } },
-  { name = "up", key = "k", code = 45, arrow = "up", resize = { 0, -60 } },
-  { name = "right", key = "l", code = 46, arrow = "right", resize = { 60, 0 } },
+  { name = "left", key = "h", code = 43, arrow = "left", resize = { -40, 0 } },
+  { name = "down", key = "j", code = 44, arrow = "down", resize = { 0, 40 } },
+  { name = "up", key = "k", code = 45, arrow = "up", resize = { 0, -40 } },
+  { name = "right", key = "l", code = 46, arrow = "right", resize = { 40, 0 } },
 }
 
 for _, d in ipairs(directions) do
-  hl.bind(mod .. " + " .. d.key, hl.dsp.focus({ direction = d.name }))
+  bind(mod .. " + " .. d.key, hl.dsp.focus({ direction = d.name }), "Focus " .. d.name)
+  bind(
+    mod .. " + " .. d.arrow,
+    hl.dsp.window.resize({ x = d.resize[1], y = d.resize[2], relative = true }),
+    "Resize window " .. d.name,
+    { repeating = true }
+  )
 
-  hl.bind(mod .. " + " .. d.arrow, hl.dsp.window.resize({ x = d.resize[1], y = d.resize[2], relative = true }))
+  for _, key in ipairs({ d.key, d.arrow }) do
+    bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ direction = d.name }), "Move window " .. d.name)
+  end
 
-  hl.bind(mod .. " + SHIFT + " .. d.key, hl.dsp.window.move({ direction = d.name }))
-  hl.bind(mod .. " + SHIFT + " .. d.arrow, hl.dsp.window.move({ direction = d.name }))
-
-  hl.bind(mod .. " + CTRL + code:" .. d.code, hl.dsp.window.swap({ direction = d.name }))
+  bind(mod .. " + CTRL + code:" .. d.code, hl.dsp.window.swap({ direction = d.name }), "Swap window " .. d.name)
+  bind(mod .. " + CTRL + " .. d.arrow, hl.dsp.window.swap({ direction = d.name }), "Swap window " .. d.name)
 end
-
--- Only up/down; CTRL + left/right cycles workspaces below, and both would fire.
-hl.bind(mod .. " + CTRL + up", hl.dsp.window.swap({ direction = "up" }))
-hl.bind(mod .. " + CTRL + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Workspaces
 
 for i = 1, 10 do
   local key = i % 10 -- 10 sits on the 0 key
-  hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+  bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }), "Workspace " .. i)
+  bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), "Move window to workspace " .. i)
 end
 
-hl.bind(mod .. " + CTRL + right", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mod .. " + CTRL + left", hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), "Next workspace")
+bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), "Previous workspace")
 
-hl.bind(mod .. " + M", hl.dsp.workspace.toggle_special("spotify"))
-hl.bind(mod .. " + O", hl.dsp.workspace.toggle_special("obs"))
-hl.bind(mod .. " + G", hl.dsp.workspace.toggle_special("gamestore"))
+local scratchpads = {
+  { key = "M", name = "spotify", label = "Spotify" },
+  { key = "G", name = "gamestore", label = "Game store" },
+}
+
+for _, s in ipairs(scratchpads) do
+  bind(mod .. " + " .. s.key, hl.dsp.workspace.toggle_special(s.name), s.label .. " scratchpad")
+  bind(
+    mod .. " + SHIFT + " .. s.key,
+    hl.dsp.window.move({ workspace = "special:" .. s.name, follow = false }),
+    "Move window to " .. s.label .. " scratchpad"
+  )
+end
 
 -- Media and hardware keys
 
--- Volume drives Spotify's own volume; mute drives the sink.
-hl.bind("XF86AudioRaiseVolume", exec("playerctl --player=spotify volume 0.05+"))
-hl.bind("XF86AudioLowerVolume", exec("playerctl --player=spotify volume 0.05-"))
-hl.bind("XF86AudioMute", exec("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+local media = { locked = true }
+local held = { locked = true, repeating = true }
+
+bind("XF86AudioRaiseVolume", exec("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), "Volume up", held)
+bind("XF86AudioLowerVolume", exec("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), "Volume down", held)
+bind("XF86AudioMute", exec("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), "Mute", media)
+bind(mod .. " + XF86AudioRaiseVolume", exec("playerctl --player=spotify volume 0.05+"), "Spotify volume up", held)
+bind(mod .. " + XF86AudioLowerVolume", exec("playerctl --player=spotify volume 0.05-"), "Spotify volume down", held)
 
 local players = "spotify,firefox"
-hl.bind("XF86AudioPlay", exec("playerctl --player=" .. players .. " play-pause"))
-hl.bind("XF86AudioPause", exec("playerctl --player=" .. players .. " play-pause"))
-hl.bind("XF86AudioNext", exec("playerctl --player=" .. players .. " next"))
-hl.bind("XF86AudioPrev", exec("playerctl --player=" .. players .. " previous"))
+bind("XF86AudioPlay", exec("playerctl --player=" .. players .. " play-pause"), "Play/pause", media)
+bind("XF86AudioPause", exec("playerctl --player=" .. players .. " play-pause"), "Play/pause", media)
+bind("XF86AudioNext", exec("playerctl --player=" .. players .. " next"), "Next track", media)
+bind("XF86AudioPrev", exec("playerctl --player=" .. players .. " previous"), "Previous track", media)
 
-hl.bind("XF86MonBrightnessUp", exec("brightnessctl set +5%"))
-hl.bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"))
+bind("XF86MonBrightnessUp", exec("brightnessctl set +5%"), "Brightness up", held)
+bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), "Brightness down", held)
