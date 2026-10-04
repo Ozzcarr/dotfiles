@@ -8,7 +8,7 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    // "dashboard", "launcher", or "" when closed.
+    // "dashboard", "launcher", "notifications", or "" when closed.
     property string panel: ""
     property string screen: ""
 

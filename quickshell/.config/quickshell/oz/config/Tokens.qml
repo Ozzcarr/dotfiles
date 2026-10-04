@@ -67,6 +67,24 @@ Singleton {
         readonly property int iconSize: 30
     }
 
+    readonly property QtObject osd: QtObject {
+        readonly property int width: 260
+        readonly property int height: 28
+        readonly property int padding: 14
+    }
+
+    readonly property QtObject notifications: QtObject {
+        readonly property int width: 380
+        readonly property int padding: 12
+        readonly property int gap: 8
+        readonly property int cardRadius: 14
+        readonly property int cardPadding: 12
+        readonly property int iconSize: 36
+        readonly property int maxHeight: 640
+        // For notifications that don't set their own timeout.
+        readonly property int timeout: 6000
+    }
+
     readonly property QtObject icon: QtObject {
         readonly property int glyph: 15
         readonly property int tray: 14

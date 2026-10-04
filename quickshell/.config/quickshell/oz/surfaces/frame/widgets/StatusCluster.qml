@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Bluetooth
 import Quickshell.Networking
-import Quickshell.Services.UPower
 import qs.components
 import qs.config
 import qs.services as Services
@@ -16,13 +15,12 @@ RowLayout {
 
     readonly property bool btConnected: Bluetooth.devices.values.some(d => d.connected)
 
-    readonly property var battery: UPower.displayDevice
-    readonly property bool hasBattery: battery?.isLaptopBattery ?? false
-    readonly property int charge: Math.round((battery?.percentage ?? 0) * 100)
-    readonly property bool draining: hasBattery && UPower.onBattery
+    readonly property bool hasBattery: Services.Battery.present
+    readonly property int charge: Services.Battery.charge
+    readonly property bool draining: Services.Battery.draining
 
     readonly property bool micMuted: Services.Vesktop.micMuted
-    readonly property bool alerting: micMuted || Services.Audio.muted || Services.Notifications.hasNotifications || Services.Notifications.dnd
+    readonly property bool deafened: Services.Vesktop.deafened
 
     Layout.alignment: Qt.AlignVCenter
 
@@ -37,13 +35,30 @@ RowLayout {
         }
     }
 
+    // Alerts, then the bell. Click opens the notification center; right click
+    // toggles do not disturb.
     Pill {
-        visible: root.alerting
+        TapHandler {
+            onTapped: Services.Panels.toggle("notifications", Services.Panels.focusedScreen)
+        }
+
+        TapHandler {
+            acceptedButtons: Qt.RightButton
+
+            onTapped: Services.Notifications.toggleDnd()
+        }
 
         MaterialIcon {
             visible: root.micMuted
 
             text: "mic_off"
+            color: Appearance.danger
+        }
+
+        MaterialIcon {
+            visible: root.deafened
+
+            text: "headset_off"
             color: Appearance.danger
         }
 
@@ -55,17 +70,8 @@ RowLayout {
         }
 
         MaterialIcon {
-            visible: Services.Notifications.hasNotifications && !Services.Notifications.dnd
-
-            text: "notifications_active"
-            color: Appearance.accent
-        }
-
-        MaterialIcon {
-            visible: Services.Notifications.dnd
-
-            text: "notifications_off"
-            color: Appearance.faint
+            text: Services.Notifications.dnd ? "notifications_off" : Services.Notifications.hasNotifications ? "notifications_active" : "notifications"
+            color: Services.Notifications.dnd ? Appearance.faint : Services.Notifications.hasNotifications ? Appearance.accent : Appearance.dim
         }
     }
 

@@ -60,8 +60,9 @@ bind(mod .. " + Y", exec(terminal .. " -e yazi"), "yazi")
 -- Shell
 
 bind(mod .. " + Tab", exec("qs -c oz ipc call dashboard toggle"), "Dashboard")
-bind(mod .. " + N", exec("swaync-client -t -sw"), "Notification center")
-bind(mod .. " + SHIFT + N", exec("swaync-client -C"), "Dismiss all notifications")
+bind(mod .. " + N", exec("qs -c oz ipc call notifications toggle"), "Notification center")
+bind(mod .. " + SHIFT + N", exec("qs -c oz ipc call notifications clear"), "Dismiss all notifications")
+bind(mod .. " + CTRL + N", exec("qs -c oz ipc call notifications dnd"), "Do not disturb")
 bind(mod .. " + V", launcher("clipboard"), "Clipboard history")
 bind(mod .. " + C", exec("hyprpicker -a"), "Color picker")
 bind(mod .. " + B", exec("wallpaper"), "Wallpaper")
@@ -170,5 +171,5 @@ bind("XF86AudioPause", exec("playerctl --player=" .. players .. " play-pause"), 
 bind("XF86AudioNext", exec("playerctl --player=" .. players .. " next"), "Next track", media)
 bind("XF86AudioPrev", exec("playerctl --player=" .. players .. " previous"), "Previous track", media)
 
-bind("XF86MonBrightnessUp", exec("brightnessctl set +5%"), "Brightness up", held)
-bind("XF86MonBrightnessDown", exec("brightnessctl set 5%-"), "Brightness down", held)
+bind("XF86MonBrightnessUp", exec("brightnessctl set +5% && qs -c oz ipc call osd brightness"), "Brightness up", held)
+bind("XF86MonBrightnessDown", exec("brightnessctl set 5%- && qs -c oz ipc call osd brightness"), "Brightness down", held)

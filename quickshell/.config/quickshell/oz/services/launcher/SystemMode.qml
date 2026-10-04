@@ -20,6 +20,7 @@ Mode {
         { key: "displays", title: "Displays", subtitle: "hyprmoncfg", glyph: "desktop_windows", command: tui("hyprmoncfg") },
         { key: "nightlight", title: "Night light", subtitle: "Toggle", glyph: "nightlight", command: `${hyprDir}/night-light.sh` },
         { key: "noise", title: "Noise mode", subtitle: "Toggle", glyph: "graphic_eq", command: "noise-mode toggle" },
+        { key: "dnd", title: "Do not disturb", subtitle: "Toggle", glyph: "notifications_off", command: "qs -c oz ipc call notifications dnd" },
         { key: "awake", title: "Keep awake", subtitle: "Toggle", glyph: "coffee", command: `${hyprDir}/keep-awake.sh` },
         { key: "wallpaper", title: "Wallpaper", glyph: "wallpaper", command: "wallpaper" },
         { key: "updates", title: "Check for updates", glyph: "update", command: "systemctl --user start nix-update-check.service" },

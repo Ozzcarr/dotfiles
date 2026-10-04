@@ -7,11 +7,12 @@ import qs.components
 import qs.config
 import qs.surfaces.frame.dashboard
 import qs.surfaces.frame.launcher
+import qs.surfaces.frame.osd
 
 Item {
     id: root
 
-    // "dashboard", "launcher", or "" when closed.
+    // "dashboard", "launcher", "osd", or "" when closed.
     property string panel: ""
 
     // Size of the pod it grows from.
@@ -27,6 +28,8 @@ Item {
             return Math.min(Tokens.dashboard.width, maxWidth);
         case "launcher":
             return Tokens.launcher.width;
+        case "osd":
+            return Tokens.osd.width;
         default:
             return collapsedWidth;
         }
@@ -38,6 +41,8 @@ Item {
             return Tokens.dashboard.height;
         case "launcher":
             return contentTop + launcher.implicitHeight + Tokens.launcher.padding;
+        case "osd":
+            return contentTop + Tokens.osd.height + Tokens.dashboard.padding / 2;
         default:
             return Tokens.frame.pod;
         }
@@ -102,20 +107,7 @@ Item {
             visible: opacity > 0
             opacity: root.panel === "dashboard" ? 1 : 0
 
-            // Out first, then in, so two panels never show at once.
-            Behavior on opacity {
-                id: dashboardFade
-
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: dashboardFade.targetValue > 0 ? Motion.fast : 0
-                    }
-
-                    NumberAnimation {
-                        duration: Motion.fast
-                    }
-                }
-            }
+            PanelFade on opacity {}
 
             sourceComponent: Dashboard {}
         }
@@ -131,20 +123,20 @@ Item {
             visible: opacity > 0
             opacity: root.panel === "launcher" ? 1 : 0
 
-            // Out first, then in, so two panels never show at once.
-            Behavior on opacity {
-                id: launcherFade
+            PanelFade on opacity {}
+        }
 
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: launcherFade.targetValue > 0 ? Motion.fast : 0
-                    }
+        OsdPanel {
+            anchors.horizontalCenter: parent.horizontalCenter
 
-                    NumberAnimation {
-                        duration: Motion.fast
-                    }
-                }
-            }
+            y: root.contentTop
+            width: Tokens.osd.width - 2 * Tokens.osd.padding
+            height: Tokens.osd.height
+
+            visible: opacity > 0
+            opacity: root.panel === "osd" ? 1 : 0
+
+            PanelFade on opacity {}
         }
     }
 }

@@ -7,6 +7,7 @@ import qs.components
 import qs.config
 import qs.services as Services
 import qs.surfaces.frame.launcher
+import qs.surfaces.frame.notifications
 import qs.surfaces.frame.widgets
 
 ShellWindow {
@@ -17,6 +18,14 @@ ShellWindow {
     readonly property int t: Tokens.frame.thickness
     readonly property bool panelOpen: Services.Panels.screen === modelData.name
     readonly property bool launcherOpen: panelOpen && Services.Panels.panel === "launcher"
+
+    // The notification center lives in its own column, so Drop can show the
+    // on-screen display meanwhile.
+    readonly property string dropPanel: {
+        if (panelOpen && Services.Panels.panel !== "notifications")
+            return Services.Panels.panel;
+        return Services.Osd.visible && Services.Panels.focusedScreen === modelData.name ? "osd" : "";
+    }
 
     // BarLayout lists widgets by name; this maps each name to its component.
     readonly property var registry: ({
@@ -51,6 +60,10 @@ ShellWindow {
 
         Region {
             item: drop
+        }
+
+        Region {
+            item: notifications
         }
 
         Region {
@@ -119,11 +132,21 @@ ShellWindow {
         Drop {
             id: drop
 
-            panel: root.panelOpen ? Services.Panels.panel : ""
+            panel: root.dropPanel
             collapsedWidth: centerPod.width
             maxWidth: parent.width - 2 * root.t
 
             x: Math.round((parent.width - width) / 2)
+        }
+
+        NotificationColumn {
+            id: notifications
+
+            open: root.panelOpen && Services.Panels.panel === "notifications"
+            showPopups: Services.Panels.focusedScreen === root.modelData.name
+            collapsedWidth: rightPod.width
+
+            x: parent.width - width
         }
 
         Rectangle {
@@ -246,7 +269,9 @@ ShellWindow {
 
     // Holds the keyboard while a panel is open. It is its own surface because
     // Hyprland gives focus back to the previous window when a focused surface
-    // goes away, but not when one merely stops taking the keyboard.
+    // goes away, but not when one merely stops taking the keyboard. On demand,
+    // not exclusive: Hyprland sends all pointer input to exclusive surfaces,
+    // which would leave the panels unclickable.
     LazyLoader {
         active: root.panelOpen
 
@@ -260,13 +285,13 @@ ShellWindow {
             exclusionMode: ExclusionMode.Ignore
             mask: Region {}
 
-            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
             Loader {
                 anchors.fill: parent
 
                 focus: true
-                sourceComponent: root.launcherOpen ? launcherKeys : dashboardKeys
+                sourceComponent: root.launcherOpen ? launcherKeys : escapeKeys
             }
 
             Component {
@@ -276,7 +301,7 @@ ShellWindow {
             }
 
             Component {
-                id: dashboardKeys
+                id: escapeKeys
 
                 Item {
                     focus: true
