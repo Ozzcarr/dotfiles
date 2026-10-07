@@ -13,7 +13,6 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
-  restart("hyprsunset")
   restart("awww-daemon")
 
   hl.exec_cmd(hypr_dir .. "/steam-friends-tile.sh")

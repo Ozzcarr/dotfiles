@@ -73,14 +73,28 @@ Singleton {
         readonly property int padding: 14
     }
 
-    readonly property QtObject notifications: QtObject {
-        readonly property int width: 380
+    readonly property QtObject session: QtObject {
+        readonly property int buttonWidth: 92
+        readonly property int buttonHeight: 84
+        readonly property int gap: 8
+        readonly property int padding: 14
+        readonly property int width: 5 * buttonWidth + 4 * gap + 2 * padding
+    }
+
+    // The right column: notifications and quick settings.
+    readonly property QtObject side: QtObject {
+        readonly property int width: 400
         readonly property int padding: 12
         readonly property int gap: 8
+        readonly property int maxHeight: 680
+        readonly property int rowHeight: 40
+        readonly property int rowRadius: 12
+    }
+
+    readonly property QtObject notifications: QtObject {
         readonly property int cardRadius: 14
         readonly property int cardPadding: 12
         readonly property int iconSize: 36
-        readonly property int maxHeight: 640
         // For notifications that don't set their own timeout.
         readonly property int timeout: 6000
     }

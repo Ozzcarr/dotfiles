@@ -75,7 +75,12 @@ RowLayout {
         }
     }
 
+    // Connections and battery. Click opens quick settings.
     Pill {
+        TapHandler {
+            onTapped: Services.Panels.toggle("settings", Services.Panels.focusedScreen)
+        }
+
         MaterialIcon {
             text: root.wifi ? "wifi" : root.wired ? "lan" : "wifi_off"
             color: root.online ? Appearance.soft : Appearance.danger

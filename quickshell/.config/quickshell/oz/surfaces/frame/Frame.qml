@@ -7,7 +7,8 @@ import qs.components
 import qs.config
 import qs.services as Services
 import qs.surfaces.frame.launcher
-import qs.surfaces.frame.notifications
+import qs.surfaces.frame.session
+import qs.surfaces.frame.settings
 import qs.surfaces.frame.widgets
 
 ShellWindow {
@@ -17,13 +18,16 @@ ShellWindow {
 
     readonly property int t: Tokens.frame.thickness
     readonly property bool panelOpen: Services.Panels.screen === modelData.name
-    readonly property bool launcherOpen: panelOpen && Services.Panels.panel === "launcher"
+    readonly property string openPanel: panelOpen ? Services.Panels.panel : ""
+    readonly property bool sideOpen: openPanel === "notifications" || openPanel === "settings"
 
-    // The notification center lives in its own column, so Drop can show the
-    // on-screen display meanwhile.
+    // The center drop shows a center panel, or else the on-screen display;
+    // not while quick settings is up, where the sliders already show levels.
     readonly property string dropPanel: {
-        if (panelOpen && Services.Panels.panel !== "notifications")
-            return Services.Panels.panel;
+        if (openPanel !== "" && !sideOpen)
+            return openPanel;
+        if (openPanel === "settings")
+            return "";
         return Services.Osd.visible && Services.Panels.focusedScreen === modelData.name ? "osd" : "";
     }
 
@@ -63,7 +67,7 @@ ShellWindow {
         }
 
         Region {
-            item: notifications
+            item: side
         }
 
         Region {
@@ -139,10 +143,10 @@ ShellWindow {
             x: Math.round((parent.width - width) / 2)
         }
 
-        NotificationColumn {
-            id: notifications
+        Side {
+            id: side
 
-            open: root.panelOpen && Services.Panels.panel === "notifications"
+            panel: root.sideOpen ? root.openPanel : ""
             showPopups: Services.Panels.focusedScreen === root.modelData.name
             collapsedWidth: rightPod.width
 
@@ -291,13 +295,36 @@ ShellWindow {
                 anchors.fill: parent
 
                 focus: true
-                sourceComponent: root.launcherOpen ? launcherKeys : escapeKeys
+                sourceComponent: {
+                    switch (root.openPanel) {
+                    case "launcher":
+                        return launcherKeys;
+                    case "settings":
+                        return settingsKeys;
+                    case "session":
+                        return sessionKeys;
+                    default:
+                        return escapeKeys;
+                    }
+                }
             }
 
             Component {
                 id: launcherKeys
 
                 LauncherKeys {}
+            }
+
+            Component {
+                id: settingsKeys
+
+                SettingsKeys {}
+            }
+
+            Component {
+                id: sessionKeys
+
+                SessionKeys {}
             }
 
             Component {

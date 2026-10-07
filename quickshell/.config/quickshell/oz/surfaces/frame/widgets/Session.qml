@@ -1,6 +1,6 @@
-import Quickshell
 import qs.components
 import qs.config
+import qs.services as Services
 
 IconButton {
     icon: "power_settings_new"
@@ -8,5 +8,5 @@ IconButton {
     tint: Appearance.accentAlt
     hoverTint: Appearance.danger
 
-    onActivated: Quickshell.execDetached(["wlogout"])
+    onActivated: Services.Panels.toggle("session", Services.Panels.focusedScreen)
 }

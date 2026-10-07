@@ -72,14 +72,15 @@ bind(mod .. " + SHIFT + S", exec("hyprshot -m region --clipboard-only"), "Screen
 
 -- System
 
-bind(mod .. " + ALT + A", float_tui("wiremix"), "Audio")
-bind(mod .. " + ALT + W", float_tui("impala"), "Wi-Fi")
-bind(mod .. " + ALT + B", float_tui("bluetui"), "Bluetooth")
+bind(mod .. " + ALT + S", exec("qs -c oz ipc call settings toggle"), "Quick settings")
+bind(mod .. " + ALT + A", exec("qs -c oz ipc call settings open audio"), "Sound settings")
+bind(mod .. " + ALT + W", exec("qs -c oz ipc call settings open wifi"), "Wi-Fi settings")
+bind(mod .. " + ALT + B", exec("qs -c oz ipc call settings open bluetooth"), "Bluetooth settings")
 bind(mod .. " + ALT + D", float_tui("hyprmoncfg"), "Displays")
 
 bind(mod .. " + ALT + M", exec("vesktop-mute"), "Vesktop: mute mic")
 bind(mod .. " + ALT + SHIFT + M", exec("vesktop-deafen"), "Vesktop: deafen")
-bind(mod .. " + ALT + N", exec(hypr_dir .. "/night-light.sh"), "Night light")
+bind(mod .. " + ALT + N", exec("qs -c oz ipc call nightlight toggle"), "Night light")
 bind(mod .. " + ALT + V", exec("noise-mode toggle"), "Noise mode")
 bind(mod .. " + ALT + I", exec(hypr_dir .. "/keep-awake.sh"), "Keep awake")
 bind(mod .. " + ALT + SPACE", launcher("system"), "System menu")
@@ -87,7 +88,7 @@ bind(mod .. " + ALT + K", launcher("binds"), "Keybind cheatsheet")
 bind(mod .. " + ALT + R", exec("qs -c oz ipc call shell reload"), "Reload shell")
 
 bind(mod .. " + ALT + L", exec("hyprlock"), "Lock")
-bind(mod .. " + ALT + P", exec("wlogout"), "Power menu")
+bind(mod .. " + ALT + P", exec("qs -c oz ipc call session toggle"), "Session menu")
 
 -- Windows
 
@@ -159,9 +160,9 @@ end
 local media = { locked = true }
 local held = { locked = true, repeating = true }
 
-bind("XF86AudioRaiseVolume", exec("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), "Volume up", held)
-bind("XF86AudioLowerVolume", exec("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), "Volume down", held)
-bind("XF86AudioMute", exec("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), "Mute", media)
+bind("XF86AudioRaiseVolume", exec("qs -c oz ipc call audio up"), "Volume up", held)
+bind("XF86AudioLowerVolume", exec("qs -c oz ipc call audio down"), "Volume down", held)
+bind("XF86AudioMute", exec("qs -c oz ipc call audio mute"), "Mute", media)
 bind(mod .. " + XF86AudioRaiseVolume", exec("playerctl --player=spotify volume 0.05+"), "Spotify volume up", held)
 bind(mod .. " + XF86AudioLowerVolume", exec("playerctl --player=spotify volume 0.05-"), "Spotify volume down", held)
 

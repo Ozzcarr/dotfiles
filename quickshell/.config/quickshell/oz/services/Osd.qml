@@ -101,18 +101,12 @@ Singleton {
         }
     }
 
-    // brightnessctl -m prints "device,class,current,percent,max".
-    Process {
-        id: brightnessQuery
+    Connections {
+        target: Brightness
 
-        command: ["brightnessctl", "-c", "backlight", "-m"]
-
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const percent = parseInt(text.split(",")[3]);
-                if (!isNaN(percent))
-                    root.show(percent > 50 ? "brightness_high" : "brightness_low", `${percent}%`, percent / 100);
-            }
+        function onPercentChanged(): void {
+            const percent = Brightness.percent;
+            root.show(percent > 50 ? "brightness_high" : "brightness_low", `${percent}%`, percent / 100);
         }
     }
 
@@ -120,7 +114,7 @@ Singleton {
         target: "osd"
 
         function brightness(): void {
-            brightnessQuery.running = true;
+            Brightness.refresh();
         }
 
         function flash(icon: string, label: string): void {

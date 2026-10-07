@@ -1,30 +1,30 @@
-// Session, settings and toggles. The settings open terminal tools until the
-// shell has its own quick settings panel.
+// Session actions, quick settings pages and toggles, searchable.
 import Quickshell
+import qs.services
 
 Mode {
     id: root
 
-    readonly property string hyprDir: `${Quickshell.env("HOME")}/dotfiles/hyprland/.config/hypr`
-
-    // `confirm` actions need a second Enter.
+    // `page` opens that quick settings page; `confirm` needs a second Enter.
     readonly property var actions: [
-        { key: "lock", title: "Lock", glyph: "lock", command: "hyprlock" },
-        { key: "suspend", title: "Suspend", glyph: "bedtime", command: "systemctl suspend" },
-        { key: "logout", title: "Log out", glyph: "logout", command: "hyprctl dispatch 'hl.dsp.exit()'", confirm: true },
-        { key: "reboot", title: "Restart", glyph: "restart_alt", command: "systemctl reboot", confirm: true },
-        { key: "poweroff", title: "Shut down", glyph: "power_settings_new", command: "systemctl poweroff", confirm: true },
-        { key: "audio", title: "Audio", subtitle: "wiremix", glyph: "volume_up", command: tui("wiremix") },
-        { key: "wifi", title: "Wi-Fi", subtitle: "impala", glyph: "wifi", command: tui("impala") },
-        { key: "bluetooth", title: "Bluetooth", subtitle: "bluetui", glyph: "bluetooth", command: tui("bluetui") },
-        { key: "displays", title: "Displays", subtitle: "hyprmoncfg", glyph: "desktop_windows", command: tui("hyprmoncfg") },
-        { key: "nightlight", title: "Night light", subtitle: "Toggle", glyph: "nightlight", command: `${hyprDir}/night-light.sh` },
-        { key: "noise", title: "Noise mode", subtitle: "Toggle", glyph: "graphic_eq", command: "noise-mode toggle" },
-        { key: "dnd", title: "Do not disturb", subtitle: "Toggle", glyph: "notifications_off", command: "qs -c oz ipc call notifications dnd" },
-        { key: "awake", title: "Keep awake", subtitle: "Toggle", glyph: "coffee", command: `${hyprDir}/keep-awake.sh` },
+        ...Session.actions.map(action => ({
+                    key: action.key,
+                    title: action.label,
+                    glyph: action.icon,
+                    command: action.command,
+                    confirm: action.confirm
+                })),
+        { key: "audio", title: "Audio", subtitle: "Devices and app volume", glyph: "volume_up", page: "audio" },
+        { key: "wifi", title: "Wi-Fi", subtitle: "Networks", glyph: "wifi", page: "wifi" },
+        { key: "bluetooth", title: "Bluetooth", subtitle: "Devices", glyph: "bluetooth", page: "bluetooth" },
+        { key: "displays", title: "Displays", subtitle: "hyprmoncfg", glyph: "desktop_windows", command: `${Launcher.terminal} --title hyprmoncfg -e hyprmoncfg` },
+        { key: "nightlight", title: "Night light", subtitle: "Toggle", glyph: "nightlight", run: () => NightLight.toggle() },
+        { key: "noise", title: "Noise mode", subtitle: "Toggle", glyph: "graphic_eq", run: () => Toggles.toggleNoise() },
+        { key: "awake", title: "Keep awake", subtitle: "Toggle", glyph: "coffee", run: () => Toggles.toggleKeepAwake() },
+        { key: "dnd", title: "Do not disturb", subtitle: "Toggle", glyph: "notifications_off", run: () => Notifications.toggleDnd() },
         { key: "wallpaper", title: "Wallpaper", glyph: "wallpaper", command: "wallpaper" },
         { key: "updates", title: "Check for updates", glyph: "update", command: "systemctl --user start nix-update-check.service" },
-        { key: "reload", title: "Reload shell", glyph: "refresh", command: "qs -c oz ipc call shell reload" }
+        { key: "reload", title: "Reload shell", glyph: "refresh", run: () => Quickshell.reload(true) }
     ]
 
     name: "system"
@@ -40,11 +40,15 @@ Mode {
                     subtitle: Launcher.confirming === action.key ? "Press Enter again to confirm" : action.subtitle,
                     glyph: action.glyph,
                     confirm: action.confirm ?? false,
-                    run: () => Launcher.exec(action.command)
+                    // Opening a page replaces the launcher, so it must not close after.
+                    keepOpen: !!action.page,
+                    run: () => {
+                        if (action.page)
+                            Panels.open("settings", Panels.focusedScreen, action.page);
+                        else if (action.run)
+                            action.run();
+                        else
+                            Launcher.exec(action.command);
+                    }
                 })), [["title", 1], ["subtitle", 0.5]])
-
-    // Window rules float these by title.
-    function tui(tool: string): string {
-        return `${Launcher.terminal} --title ${tool} -e ${tool}`;
-    }
 }

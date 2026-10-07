@@ -8,11 +8,12 @@ import qs.config
 import qs.surfaces.frame.dashboard
 import qs.surfaces.frame.launcher
 import qs.surfaces.frame.osd
+import qs.surfaces.frame.session
 
 Item {
     id: root
 
-    // "dashboard", "launcher", "osd", or "" when closed.
+    // "dashboard", "launcher", "session", "osd", or "" when closed.
     property string panel: ""
 
     // Size of the pod it grows from.
@@ -28,6 +29,8 @@ Item {
             return Math.min(Tokens.dashboard.width, maxWidth);
         case "launcher":
             return Tokens.launcher.width;
+        case "session":
+            return Tokens.session.width;
         case "osd":
             return Tokens.osd.width;
         default:
@@ -41,6 +44,8 @@ Item {
             return Tokens.dashboard.height;
         case "launcher":
             return contentTop + launcher.implicitHeight + Tokens.launcher.padding;
+        case "session":
+            return contentTop + Tokens.session.buttonHeight + Tokens.session.padding;
         case "osd":
             return contentTop + Tokens.osd.height + Tokens.dashboard.padding / 2;
         default:
@@ -122,6 +127,17 @@ Item {
 
             visible: opacity > 0
             opacity: root.panel === "launcher" ? 1 : 0
+
+            PanelFade on opacity {}
+        }
+
+        SessionPanel {
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            y: root.contentTop
+
+            visible: opacity > 0
+            opacity: root.panel === "session" ? 1 : 0
 
             PanelFade on opacity {}
         }

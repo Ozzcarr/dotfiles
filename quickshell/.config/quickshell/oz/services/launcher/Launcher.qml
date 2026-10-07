@@ -177,7 +177,7 @@ Singleton {
                 return;
             }
             root.begin(mode);
-            Panels.open("launcher", screen);
+            Panels.open("launcher", screen, "");
         }
     }
 }
