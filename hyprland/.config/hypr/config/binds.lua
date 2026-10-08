@@ -3,7 +3,6 @@
 -- description, which is what the cheatsheet lists.
 
 local mod = "SUPER"
-local hypr_dir = os.getenv("HOME") .. "/dotfiles/hyprland/.config/hypr"
 
 local terminal = "kitty"
 
@@ -83,12 +82,12 @@ bind(mod .. " + ALT + SHIFT + M", exec("vesktop-deafen"), "Vesktop: deafen")
 bind(mod .. " + ALT + G", exec("vesktop-stream"), "Vesktop: stream the game")
 bind(mod .. " + ALT + N", exec("qs -c oz ipc call nightlight toggle"), "Night light")
 bind(mod .. " + ALT + V", exec("noise-mode toggle"), "Noise mode")
-bind(mod .. " + ALT + I", exec(hypr_dir .. "/keep-awake.sh"), "Keep awake")
+bind(mod .. " + ALT + I", exec("qs -c oz ipc call idle keepawake"), "Keep awake")
 bind(mod .. " + ALT + SPACE", launcher("system"), "System menu")
 bind(mod .. " + ALT + K", launcher("binds"), "Keybind cheatsheet")
 bind(mod .. " + ALT + R", exec("qs -c oz ipc call shell reload"), "Reload shell")
 
-bind(mod .. " + ALT + L", exec("hyprlock"), "Lock")
+bind(mod .. " + ALT + L", exec("qs -c oz ipc call lock lock"), "Lock")
 bind(mod .. " + ALT + P", exec("qs -c oz ipc call session toggle"), "Session menu")
 
 -- Windows
@@ -161,6 +160,7 @@ bind("code:191", exec("vesktop-mute"), "Vesktop: mute mic")
 bind("code:192", exec("vesktop-deafen"), "Vesktop: deafen")
 bind("code:193", exec("vesktop-stream"), "Vesktop: stream the game")
 bind("code:194", exec("noise-mode toggle"), "Noise mode")
+bind("code:199", exec("obs-replay save"), "OBS: save replay")
 
 -- Media and hardware keys
 

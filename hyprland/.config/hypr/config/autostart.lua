@@ -21,4 +21,6 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("$HOME/.local/bin/set-primary-monitor DP-1")
 
   hl.exec_cmd("sleep 1.0 && wallpaper restore")
+
+  hl.exec_cmd("obs --minimize-to-tray --startreplaybuffer --disable-shutdown-check")
 end)

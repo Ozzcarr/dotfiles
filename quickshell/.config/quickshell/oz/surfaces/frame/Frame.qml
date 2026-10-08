@@ -2,11 +2,13 @@
 // It reserves no space itself: gaps_out in looknfeel.lua leaves room for it.
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import qs.components
 import qs.config
 import qs.services as Services
 import qs.surfaces.frame.launcher
+import qs.surfaces.frame.osd
 import qs.surfaces.frame.session
 import qs.surfaces.frame.settings
 import qs.surfaces.frame.widgets
@@ -20,6 +22,8 @@ ShellWindow {
     readonly property bool panelOpen: Services.Panels.screen === modelData.name
     readonly property string openPanel: panelOpen ? Services.Panels.panel : ""
     readonly property bool sideOpen: openPanel === "notifications" || openPanel === "settings"
+    // A fullscreen window covers the frame, so the OSD moves above it.
+    readonly property bool covered: Hyprland.monitorFor(modelData)?.activeWorkspace?.hasFullscreen ?? false
 
     // The center drop shows a center panel, or else the on-screen display;
     // not while quick settings is up, where the sliders already show levels.
@@ -268,6 +272,14 @@ ShellWindow {
 
             x: parent.width - root.t - width
             y: parent.height - root.t - height
+        }
+    }
+
+    LazyLoader {
+        active: root.covered && root.dropPanel === "osd"
+
+        OsdOverlay {
+            screen: root.modelData
         }
     }
 

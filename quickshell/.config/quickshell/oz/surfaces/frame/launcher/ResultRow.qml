@@ -112,6 +112,6 @@ Item {
         hoverEnabled: true
 
         onEntered: Launcher.current = root.index
-        onClicked: event => Launcher.activate(root.index, event.modifiers & Qt.ShiftModifier)
+        onClicked: Launcher.activate(root.index)
     }
 }

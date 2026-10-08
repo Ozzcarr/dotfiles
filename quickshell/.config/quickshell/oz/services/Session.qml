@@ -8,7 +8,7 @@ Singleton {
     id: root
 
     readonly property var actions: [
-        { key: "lock", label: "Lock", icon: "lock", command: "hyprlock" },
+        { key: "lock", label: "Lock", icon: "lock", command: "qs -c oz ipc call lock lock" },
         { key: "suspend", label: "Suspend", icon: "bedtime", command: "systemctl suspend" },
         { key: "logout", label: "Log out", icon: "logout", command: "hyprctl dispatch 'hl.dsp.exit()'", confirm: true },
         { key: "reboot", label: "Restart", icon: "restart_alt", command: "systemctl reboot", confirm: true },

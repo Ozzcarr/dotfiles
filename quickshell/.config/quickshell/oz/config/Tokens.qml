@@ -81,6 +81,14 @@ Singleton {
         readonly property int width: 5 * buttonWidth + 4 * gap + 2 * padding
     }
 
+    readonly property QtObject lock: QtObject {
+        readonly property int clockSize: 112
+        readonly property int fieldWidth: 320
+        readonly property int fieldHeight: 46
+        readonly property real blur: 1
+        readonly property real dim: 0.2
+    }
+
     // The right column: notifications and quick settings.
     readonly property QtObject side: QtObject {
         readonly property int width: 400

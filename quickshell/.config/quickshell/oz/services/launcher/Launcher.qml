@@ -13,7 +13,7 @@ Singleton {
 
     readonly property string terminal: "kitty"
 
-    readonly property list<Mode> modes: [apps, calc, clipboard, windows, system, binds, run]
+    readonly property list<Mode> modes: [apps, calc, clipboard, system, binds]
 
     property Mode mode: apps
     property string query: ""
@@ -59,7 +59,7 @@ Singleton {
         root.confirming = "";
     }
 
-    function activate(index: int, alt: bool): void {
+    function activate(index: int): void {
         const item = root.results[index];
         if (!item)
             return;
@@ -70,7 +70,7 @@ Singleton {
             return;
         }
 
-        item.run(alt);
+        item.run();
         if (!item.keepOpen)
             Panels.close();
     }
@@ -151,20 +151,12 @@ Singleton {
         id: clipboard
     }
 
-    WindowsMode {
-        id: windows
-    }
-
     SystemMode {
         id: system
     }
 
     BindsMode {
         id: binds
-    }
-
-    RunMode {
-        id: run
     }
 
     IpcHandler {

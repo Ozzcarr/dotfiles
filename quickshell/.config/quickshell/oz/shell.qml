@@ -7,17 +7,23 @@ import Quickshell
 import Quickshell.Io
 import qs.services as Services
 import qs.surfaces.frame
+import qs.surfaces.lock
 
 ShellRoot {
     // Start the samplers at launch so the dashboard opens with history. A bare
     // reference to a singleton doesn't create it; reading a property does.
     readonly property var sampling: [Services.Sys.cpu, Services.Gpu.utilization]
 
+    // Idle runs on its own: locking, screens off and lock before sleep.
+    readonly property int idle: Services.Idle.lockAfter
+
     Variants {
         model: Quickshell.screens
 
         Frame {}
     }
+
+    SessionLock {}
 
     IpcHandler {
         target: "shell"

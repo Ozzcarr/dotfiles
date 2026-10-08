@@ -134,9 +134,9 @@ ColumnLayout {
 
             icon: "coffee"
             label: "Keep awake"
-            active: Services.Toggles.keepAwake
+            active: Services.Idle.keepAwake
 
-            onToggled: Services.Toggles.toggleKeepAwake()
+            onToggled: Services.Idle.toggleKeepAwake()
         }
 
         Tile {
@@ -144,10 +144,23 @@ ColumnLayout {
 
             icon: "graphic_eq"
             label: "Noise removal"
-            detail: Services.Toggles.noiseDeep ? "Deep" : "Light"
-            active: Services.Toggles.noiseDeep
+            detail: Services.NoiseMode.deep ? "Deep" : "Light"
+            active: Services.NoiseMode.deep
 
-            onToggled: Services.Toggles.toggleNoise()
+            onToggled: Services.NoiseMode.toggle()
+        }
+
+        Tile {
+            Layout.fillWidth: true
+
+            icon: Services.Replay.active ? "movie" : "videocam_off"
+            label: "Replay buffer"
+            detail: !Services.Replay.available ? "OBS closed" : Services.Replay.active ? `${Services.Replay.length}s` : "Off"
+            active: Services.Replay.active
+            expandable: true
+
+            onToggled: Services.Replay.toggle()
+            onExpanded: root.openPage("replay")
         }
 
         Tile {

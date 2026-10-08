@@ -7,8 +7,8 @@ import qs.services as Services
 
 Singleton {
     readonly property color text: Scheme.base05
-    readonly property color dim: Scheme.base04
-    readonly property color faint: Scheme.base03
+    readonly property color dim: Qt.rgba(text.r + (panel.r - text.r) * 0.35, text.g + (panel.g - text.g) * 0.35, text.b + (panel.b - text.b) * 0.35, 1)
+    readonly property color faint: Qt.rgba(text.r + (panel.r - text.r) * 0.55, text.g + (panel.g - text.g) * 0.55, text.b + (panel.b - text.b) * 0.55, 1)
 
     readonly property color accent: Services.Wallpaper.accent
     readonly property color accentAlt: Services.Wallpaper.accentAlt

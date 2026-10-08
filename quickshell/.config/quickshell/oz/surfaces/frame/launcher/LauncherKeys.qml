@@ -25,7 +25,6 @@ TextInput {
 
     Keys.onPressed: event => {
         const ctrl = event.modifiers & Qt.ControlModifier;
-        const shift = event.modifiers & Qt.ShiftModifier;
         const rows = Tokens.launcher.rows;
 
         switch (event.key) {
@@ -34,7 +33,7 @@ TextInput {
             break;
         case Qt.Key_Return:
         case Qt.Key_Enter:
-            Launcher.activate(Launcher.current, shift);
+            Launcher.activate(Launcher.current);
             break;
         case Qt.Key_Down:
         case Qt.Key_Tab:

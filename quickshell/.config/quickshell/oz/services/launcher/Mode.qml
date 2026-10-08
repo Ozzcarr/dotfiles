@@ -7,7 +7,7 @@
 //   hint      right-aligned text, like a key combo (optional)
 //   confirm   needs a second Enter (optional)
 //   keepOpen  the launcher stays open after it runs (optional)
-//   run(alt)  what Enter does; alt is true with Shift held
+//   run()     what Enter does
 import Quickshell
 
 Scope {

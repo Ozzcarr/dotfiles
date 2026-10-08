@@ -5,6 +5,9 @@ hl.config({
     anr_missed_pings = 15,
     initial_workspace_tracking = 0,
     mouse_move_enables_dpms = true,
+    -- If the shell dies while locked, the session stays locked; this lets the
+    -- restarted shell take the lock over instead of leaving the red screen.
+    allow_session_lock_restore = true,
   },
 
   cursor = {

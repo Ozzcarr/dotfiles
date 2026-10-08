@@ -16,7 +16,8 @@ ColumnLayout {
             audio: "Sound",
             wifi: "Wi-Fi",
             bluetooth: "Bluetooth",
-            nightlight: "Night light"
+            nightlight: "Night light",
+            replay: "Replay buffer"
         })
 
     spacing: Tokens.side.gap
@@ -24,8 +25,9 @@ ColumnLayout {
     // These can change outside the shell.
     onVisibleChanged: {
         if (visible) {
-            Services.Toggles.refresh();
+            Services.NoiseMode.refresh();
             Services.Audio.refreshSource();
+            Services.Replay.refresh();
         }
     }
 
@@ -99,6 +101,8 @@ ColumnLayout {
                     return bluetoothPage;
                 case "nightlight":
                     return nightLightPage;
+                case "replay":
+                    return replayPage;
                 default:
                     return overview;
                 }
@@ -134,5 +138,11 @@ ColumnLayout {
         id: nightLightPage
 
         NightLightPage {}
+    }
+
+    Component {
+        id: replayPage
+
+        ReplayPage {}
     }
 }
