@@ -8,9 +8,12 @@ import qs.components
 import qs.config
 import qs.services as Services
 import qs.surfaces.frame.launcher
+import qs.surfaces.frame.nix
 import qs.surfaces.frame.osd
+import qs.surfaces.frame.polkit
 import qs.surfaces.frame.session
 import qs.surfaces.frame.settings
+import qs.surfaces.frame.wallpaper
 import qs.surfaces.frame.widgets
 
 ShellWindow {
@@ -315,6 +318,12 @@ ShellWindow {
                         return settingsKeys;
                     case "session":
                         return sessionKeys;
+                    case "wallpaper":
+                        return wallpaperKeys;
+                    case "nix":
+                        return nixKeys;
+                    case "polkit":
+                        return polkitKeys;
                     default:
                         return escapeKeys;
                     }
@@ -337,6 +346,24 @@ ShellWindow {
                 id: sessionKeys
 
                 SessionKeys {}
+            }
+
+            Component {
+                id: wallpaperKeys
+
+                WallpaperKeys {}
+            }
+
+            Component {
+                id: nixKeys
+
+                NixKeys {}
+            }
+
+            Component {
+                id: polkitKeys
+
+                PolkitKeys {}
             }
 
             Component {

@@ -64,7 +64,7 @@ bind(mod .. " + SHIFT + N", exec("qs -c oz ipc call notifications clear"), "Dism
 bind(mod .. " + CTRL + N", exec("qs -c oz ipc call notifications dnd"), "Do not disturb")
 bind(mod .. " + V", launcher("clipboard"), "Clipboard history")
 bind(mod .. " + C", exec("hyprpicker -a"), "Color picker")
-bind(mod .. " + B", exec("wallpaper"), "Wallpaper")
+bind(mod .. " + B", exec("qs -c oz ipc call wallpaper toggle"), "Wallpaper")
 
 bind(mod .. " + S", exec("hyprshot -m region -o $HOME/Pictures/Screenshots"), "Screenshot a region")
 bind(mod .. " + SHIFT + S", exec("hyprshot -m region --clipboard-only"), "Screenshot a region to the clipboard")
@@ -76,6 +76,7 @@ bind(mod .. " + ALT + A", exec("qs -c oz ipc call settings open audio"), "Sound 
 bind(mod .. " + ALT + W", exec("qs -c oz ipc call settings open wifi"), "Wi-Fi settings")
 bind(mod .. " + ALT + B", exec("qs -c oz ipc call settings open bluetooth"), "Bluetooth settings")
 bind(mod .. " + ALT + D", float_tui("hyprmoncfg"), "Displays")
+bind(mod .. " + ALT + U", exec("qs -c oz ipc call nix toggle"), "NixOS: rebuild, update and generations")
 
 bind(mod .. " + ALT + M", exec("vesktop-mute"), "Vesktop: mute mic")
 bind(mod .. " + ALT + SHIFT + M", exec("vesktop-deafen"), "Vesktop: deafen")

@@ -38,7 +38,10 @@ Card {
         implicitHeight: updates.implicitHeight
 
         hoverEnabled: true
-        onClicked: Services.Updates.check()
+        onClicked: {
+            Services.Nix.view = "updates";
+            Services.Panels.open("nix", Services.Panels.screen, "");
+        }
 
         RowLayout {
             id: updates

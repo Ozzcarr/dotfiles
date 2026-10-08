@@ -8,8 +8,8 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    // "dashboard", "launcher" or "session" in the center; "notifications" or
-    // "settings" on the right; "" when closed.
+    // "dashboard", "launcher", "session", "wallpaper", "nix" or "polkit" in the
+    // center; "notifications" or "settings" on the right; "" when closed.
     property string panel: ""
     property string screen: ""
     // A sub-page of the open panel, like "wifi" in settings; "" for its start.

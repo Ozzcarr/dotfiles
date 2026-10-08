@@ -67,6 +67,31 @@ Singleton {
         readonly property int iconSize: 30
     }
 
+    readonly property QtObject wallpaper: QtObject {
+        readonly property int columns: 3
+        // Visible at once; more scroll.
+        readonly property int rows: 3
+        readonly property int thumbWidth: 240
+        readonly property int thumbHeight: 135
+        readonly property int labelHeight: 26
+        readonly property int gap: 10
+        readonly property int padding: 14
+    }
+
+    readonly property QtObject nix: QtObject {
+        readonly property int width: 900
+        readonly property int height: 460
+        readonly property int padding: 14
+        readonly property int actionsWidth: 230
+        readonly property int rowHeight: 34
+        readonly property int lineHeight: 17
+    }
+
+    readonly property QtObject polkit: QtObject {
+        readonly property int width: 440
+        readonly property int padding: 14
+    }
+
     readonly property QtObject osd: QtObject {
         readonly property int width: 260
         readonly property int height: 28

@@ -7,13 +7,16 @@ import qs.components
 import qs.config
 import qs.surfaces.frame.dashboard
 import qs.surfaces.frame.launcher
+import qs.surfaces.frame.nix
 import qs.surfaces.frame.osd
+import qs.surfaces.frame.polkit
 import qs.surfaces.frame.session
+import qs.surfaces.frame.wallpaper
 
 Item {
     id: root
 
-    // "dashboard", "launcher", "session", "osd", or "" when closed.
+    // "dashboard", "launcher", "session", "wallpaper", "osd", or "" when closed.
     property string panel: ""
 
     // Size of the pod it grows from.
@@ -31,6 +34,12 @@ Item {
             return Tokens.launcher.width;
         case "session":
             return Tokens.session.width;
+        case "wallpaper":
+            return wallpaper.implicitWidth + 2 * Tokens.wallpaper.padding;
+        case "nix":
+            return Math.min(Tokens.nix.width, maxWidth);
+        case "polkit":
+            return Tokens.polkit.width;
         case "osd":
             return Tokens.osd.width;
         default:
@@ -46,6 +55,12 @@ Item {
             return contentTop + launcher.implicitHeight + Tokens.launcher.padding;
         case "session":
             return contentTop + Tokens.session.buttonHeight + Tokens.session.padding;
+        case "wallpaper":
+            return contentTop + wallpaper.implicitHeight + Tokens.wallpaper.padding;
+        case "nix":
+            return Tokens.nix.height;
+        case "polkit":
+            return contentTop + polkit.implicitHeight + Tokens.polkit.padding;
         case "osd":
             return contentTop + Tokens.osd.height + Tokens.dashboard.padding / 2;
         default:
@@ -138,6 +153,51 @@ Item {
 
             visible: opacity > 0
             opacity: root.panel === "session" ? 1 : 0
+
+            PanelFade on opacity {}
+        }
+
+        WallpaperPanel {
+            id: wallpaper
+
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            y: root.contentTop
+            width: implicitWidth
+            height: implicitHeight
+
+            visible: opacity > 0
+            opacity: root.panel === "wallpaper" ? 1 : 0
+
+            PanelFade on opacity {}
+        }
+
+        Loader {
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            y: root.contentTop
+            width: Math.min(Tokens.nix.width, root.maxWidth) - 2 * Tokens.nix.padding
+            height: Tokens.nix.height - y - Tokens.nix.padding
+
+            active: root.expanded
+            visible: opacity > 0
+            opacity: root.panel === "nix" ? 1 : 0
+
+            PanelFade on opacity {}
+
+            sourceComponent: NixPanel {}
+        }
+
+        PolkitPanel {
+            id: polkit
+
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            y: root.contentTop
+            width: Tokens.polkit.width - 2 * Tokens.polkit.padding
+
+            visible: opacity > 0
+            opacity: root.panel === "polkit" ? 1 : 0
 
             PanelFade on opacity {}
         }

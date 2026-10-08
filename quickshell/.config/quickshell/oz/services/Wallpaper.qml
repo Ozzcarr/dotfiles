@@ -1,5 +1,7 @@
-// The wallpaper script calls `qs -c oz ipc call wallpaper changed`. The symlink
-// isn't watched: it gets replaced rather than written, which watchers miss.
+// The current wallpaper, its accent colors, and the picker. Applying goes
+// through the wallpaper script, which owns the transition and the state link
+// and calls `qs -c oz ipc call wallpaper changed` after. The symlink isn't
+// watched: it gets replaced rather than written, which watchers miss.
 pragma Singleton
 
 import QtQuick
@@ -11,7 +13,13 @@ import qs.generated
 Singleton {
     id: root
 
+    readonly property string dir: `${Quickshell.env("HOME")}/dotfiles/wallpapers`
+
     property string path: ""
+
+    // The images in the directory, and the one selected in the picker.
+    property list<string> files: []
+    property int selected: 0
 
     // Falls back to the scheme when the wallpaper has nothing vivid.
     readonly property color accent: picked.length > 0 ? picked[0] : Scheme.base0E
@@ -21,6 +29,30 @@ Singleton {
 
     function refresh(): void {
         resolve.running = true;
+    }
+
+    // Rescans the directory; the picker starts on the current wallpaper.
+    function scan(): void {
+        lister.running = true;
+    }
+
+    function move(delta: int): void {
+        const next = root.selected + delta;
+        if (next >= 0 && next < root.files.length)
+            root.selected = next;
+    }
+
+    function apply(index: int): void {
+        const file = root.files[index];
+        if (!file)
+            return;
+        Panels.close();
+        if (file !== root.path)
+            Quickshell.execDetached(["wallpaper", "set", file]);
+    }
+
+    function title(file: string): string {
+        return file.split("/").pop().replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
     }
 
     // Two vivid colors with distinct hues, brightened for the dark frame. A
@@ -73,7 +105,11 @@ Singleton {
     onAccentChanged: Qt.callLater(pushAccent)
     onAccentAltChanged: Qt.callLater(pushAccent)
 
-    Component.onCompleted: refresh()
+    // Scanned up front too, so the picker opens at its final size.
+    Component.onCompleted: {
+        refresh();
+        scan();
+    }
 
     // The quantizer needs the real path; the symlink path never changes.
     Process {
@@ -83,6 +119,19 @@ Singleton {
 
         stdout: StdioCollector {
             onStreamFinished: root.path = text.trim()
+        }
+    }
+
+    Process {
+        id: lister
+
+        command: ["find", "-L", root.dir, "-maxdepth", "1", "-type", "f", "(", "-iname", "*.png", "-o", "-iname", "*.jpg", "-o", "-iname", "*.jpeg", "-o", "-iname", "*.webp", ")"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.files = text.split("\n").filter(file => file !== "").sort();
+                root.selected = Math.max(0, root.files.indexOf(root.path));
+            }
         }
     }
 
@@ -117,6 +166,10 @@ Singleton {
 
         function changed(): void {
             root.refresh();
+        }
+
+        function toggle(): void {
+            Panels.toggle("wallpaper", Panels.focusedScreen);
         }
     }
 }

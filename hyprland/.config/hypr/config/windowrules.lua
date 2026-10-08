@@ -53,13 +53,6 @@ hl.window_rule({
 
 hl.window_rule({ name = "mpv-float", match = { class = [[^(mpv)$]] }, float = true })
 
-hl.window_rule({
-  name = "polkit-float",
-  match = { title = [[^(Authentication Required)$]] },
-  float = true,
-  center = true,
-})
-
 -- Some toolkits only set the final title after mapping, so match both.
 local file_chooser = [[^([Oo]pen|[Ss]ave|[Ss]elect|[Cc]hoose).*([Ff]iles?|[Ff]olders?).*$]]
 

@@ -26,6 +26,28 @@ RowLayout {
 
     spacing: Tokens.space.tight
 
+    // A rebuild in progress. Click opens the NixOS panel.
+    Pill {
+        visible: Services.Nix.running !== ""
+
+        TapHandler {
+            onTapped: Services.Panels.open("nix", Services.Panels.focusedScreen, "")
+        }
+
+        MaterialIcon {
+            text: "progress_activity"
+            color: Appearance.accent
+
+            RotationAnimation on rotation {
+                running: Services.Nix.running !== ""
+                from: 0
+                to: 360
+                duration: 1000
+                loops: Animation.Infinite
+            }
+        }
+    }
+
     Pill {
         visible: Services.GameMode.active
 

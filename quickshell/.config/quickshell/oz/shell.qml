@@ -17,6 +17,9 @@ ShellRoot {
     // Idle runs on its own: locking, screens off and lock before sleep.
     readonly property int idle: Services.Idle.lockAfter
 
+    // The polkit agent registers for the session as soon as it exists.
+    readonly property bool polkit: Services.Polkit.registered
+
     Variants {
         model: Quickshell.screens
 
