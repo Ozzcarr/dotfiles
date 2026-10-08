@@ -80,6 +80,7 @@ bind(mod .. " + ALT + D", float_tui("hyprmoncfg"), "Displays")
 
 bind(mod .. " + ALT + M", exec("vesktop-mute"), "Vesktop: mute mic")
 bind(mod .. " + ALT + SHIFT + M", exec("vesktop-deafen"), "Vesktop: deafen")
+bind(mod .. " + ALT + G", exec("vesktop-stream"), "Vesktop: stream the game")
 bind(mod .. " + ALT + N", exec("qs -c oz ipc call nightlight toggle"), "Night light")
 bind(mod .. " + ALT + V", exec("noise-mode toggle"), "Noise mode")
 bind(mod .. " + ALT + I", exec(hypr_dir .. "/keep-awake.sh"), "Keep awake")
@@ -154,6 +155,12 @@ for _, s in ipairs(scratchpads) do
     "Move window to " .. s.label .. " scratchpad"
   )
 end
+
+-- Wooting UwU
+bind("code:191", exec("vesktop-mute"), "Vesktop: mute mic")
+bind("code:192", exec("vesktop-deafen"), "Vesktop: deafen")
+bind("code:193", exec("vesktop-stream"), "Vesktop: stream the game")
+bind("code:194", exec("noise-mode toggle"), "Noise mode")
 
 -- Media and hardware keys
 

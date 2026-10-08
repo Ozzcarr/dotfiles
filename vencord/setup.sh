@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Sets up a Vencord dev checkout with this list of userplugins cloned in.
+# Sets up a Vencord dev checkout with this list of userplugins cloned in, and
+# the ones under plugins/ linked in.
 # Vesktop is pointed at the resulting dist, so `pnpm watch` + Ctrl+R is the edit loop.
 set -euo pipefail
 
@@ -23,6 +24,14 @@ for repo in "${PLUGIN_REPOS[@]}"; do
     else
         gh repo clone "$repo" "$dest"
     fi
+done
+
+# Plugins that live in this repo instead of their own. Copied, not linked: the build
+# resolves @utils and friends from the file's real path, which a symlink moves out of
+# the checkout. Rerun this after editing one.
+for plugin in "$(dirname "$(realpath "$0")")"/plugins/*/; do
+    rm -rf "$VENCORD_DIR/src/userplugins/$(basename "$plugin")"
+    cp -r "$plugin" "$VENCORD_DIR/src/userplugins/"
 done
 
 cd "$VENCORD_DIR"
