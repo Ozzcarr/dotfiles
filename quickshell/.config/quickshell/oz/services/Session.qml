@@ -15,6 +15,10 @@ Singleton {
         { key: "poweroff", label: "Shut down", icon: "power_settings_new", command: "systemctl poweroff", confirm: true }
     ]
 
+    // OBS dies with the compositor and then reports a crash on the next start,
+    // so the actions that end the session quit it first.
+    readonly property string quitObs: "pkill -INT -x 'obs|[.]obs-wrapped' && timeout 10 sh -c \"while pgrep -x 'obs|[.]obs-wrapped' >/dev/null; do sleep 0.2; done\"; "
+
     // Selection in the session menu, and the action waiting for a second press.
     property int current: 0
     property string confirming: ""
@@ -40,7 +44,7 @@ Singleton {
 
         root.confirming = "";
         Panels.close();
-        Quickshell.execDetached(["sh", "-c", action.command]);
+        Quickshell.execDetached(["sh", "-c", action.confirm ? root.quitObs + action.command : action.command]);
         return true;
     }
 }
