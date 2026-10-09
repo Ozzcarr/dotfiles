@@ -1,4 +1,4 @@
-// Lock, suspend, log out, restart and shut down, for the session menu and the
+// Lock, log out, restart and shut down, for the session menu and the
 // launcher's system mode. The ones that end the session need a second press.
 pragma Singleton
 
@@ -9,7 +9,6 @@ Singleton {
 
     readonly property var actions: [
         { key: "lock", label: "Lock", icon: "lock", command: "qs -c oz ipc call lock lock" },
-        { key: "suspend", label: "Suspend", icon: "bedtime", command: "systemctl suspend" },
         { key: "logout", label: "Log out", icon: "logout", command: "hyprctl dispatch 'hl.dsp.exit()'", confirm: true },
         { key: "reboot", label: "Restart", icon: "restart_alt", command: "systemctl reboot", confirm: true },
         { key: "poweroff", label: "Shut down", icon: "power_settings_new", command: "systemctl poweroff", confirm: true }

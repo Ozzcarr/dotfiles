@@ -103,7 +103,6 @@ Singleton {
         readonly property int buttonHeight: 84
         readonly property int gap: 8
         readonly property int padding: 14
-        readonly property int width: 5 * buttonWidth + 4 * gap + 2 * padding
     }
 
     readonly property QtObject lock: QtObject {

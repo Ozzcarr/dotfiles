@@ -33,7 +33,7 @@ Item {
         case "launcher":
             return Tokens.launcher.width;
         case "session":
-            return Tokens.session.width;
+            return session.implicitWidth + 2 * Tokens.session.padding;
         case "wallpaper":
             return wallpaper.implicitWidth + 2 * Tokens.wallpaper.padding;
         case "nix":
@@ -147,6 +147,8 @@ Item {
         }
 
         SessionPanel {
+            id: session
+
             anchors.horizontalCenter: parent.horizontalCenter
 
             y: root.contentTop
