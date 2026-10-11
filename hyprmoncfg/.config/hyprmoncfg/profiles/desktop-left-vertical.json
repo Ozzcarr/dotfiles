@@ -1,7 +1,7 @@
 {
   "name": "Desktop Left Vertical",
   "created_at": "2026-09-22T19:36:41.813766359Z",
-  "updated_at": "2026-09-22T23:05:09.929309337Z",
+  "updated_at": "2026-10-11T15:53:58.033042548Z",
   "outputs": [
     {
       "key": "ancor communications inc|vg248|f3lmqs027757",
@@ -19,7 +19,7 @@
       "x": 0,
       "y": 0,
       "scale": 1,
-      "transform": 1,
+      "transform": 3,
       "bitdepth": 8,
       "cm": "srgb",
       "sdr_brightness": 1,
@@ -60,8 +60,8 @@
     "max_workspaces": 9,
     "group_size": 3,
     "monitor_order": [
-      "microstep|msi g273q|ca8a641300127",
-      "ancor communications inc|vg248|f3lmqs027757"
+      "ancor communications inc|vg248|f3lmqs027757",
+      "microstep|msi g273q|ca8a641300127"
     ],
     "rules": [
       {
