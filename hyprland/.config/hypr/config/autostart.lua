@@ -20,5 +20,5 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("sleep 1.0 && wallpaper restore")
 
-  hl.exec_cmd("obs --minimize-to-tray --startreplaybuffer")
+  hl.exec_cmd("LD_LIBRARY_PATH=/run/opengl-driver/lib obs --minimize-to-tray --startreplaybuffer")
 end)
