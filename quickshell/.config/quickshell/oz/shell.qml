@@ -8,6 +8,7 @@ import Quickshell.Io
 import qs.services as Services
 import qs.surfaces.frame
 import qs.surfaces.lock
+import qs.surfaces.screenshot
 
 ShellRoot {
     // Start the samplers at launch so the dashboard opens with history. A bare
@@ -27,6 +28,12 @@ ShellRoot {
     }
 
     SessionLock {}
+
+    Variants {
+        model: Services.Screenshot.active ? Quickshell.screens : []
+
+        ScreenshotOverlay {}
+    }
 
     IpcHandler {
         target: "shell"

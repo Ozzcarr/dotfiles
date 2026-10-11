@@ -66,8 +66,8 @@ bind(mod .. " + V", launcher("clipboard"), "Clipboard history")
 bind(mod .. " + C", exec("hyprpicker -a"), "Color picker")
 bind(mod .. " + B", exec("qs -c oz ipc call wallpaper toggle"), "Wallpaper")
 
-bind(mod .. " + S", exec("hyprshot -m region -o $HOME/Pictures/Screenshots"), "Screenshot a region")
-bind(mod .. " + SHIFT + S", exec("hyprshot -m region --clipboard-only"), "Screenshot a region to the clipboard")
+bind(mod .. " + S", exec("qs -c oz ipc call screenshot region"), "Screenshot")
+bind(mod .. " + SHIFT + S", exec("qs -c oz ipc call screenshot edit"), "Screenshot and edit")
 
 -- System
 

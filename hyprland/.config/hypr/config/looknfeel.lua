@@ -80,3 +80,5 @@ hl.animation({
 -- ignore_alpha keeps the blur to the frame itself, not the transparent rest of the surface.
 hl.layer_rule({ name = "shell-blur", match = { namespace = "quickshell-.*" }, blur = true })
 hl.layer_rule({ name = "shell-ignore-alpha", match = { namespace = "quickshell-.*" }, ignore_alpha = 0.4 })
+-- The screenshot overlay is a frozen copy of the screen; animating it would show.
+hl.layer_rule({ name = "shell-screenshot", match = { namespace = "quickshell-screenshot" }, no_anim = true })
