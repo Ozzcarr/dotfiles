@@ -42,6 +42,18 @@ export function listen(e: IpcMainInvokeEvent) {
     server.listen(socketPath);
 }
 
+// Signal 0 only checks the process exists; EPERM still means it does.
+export function anyAlive(_: IpcMainInvokeEvent, pids: number[]) {
+    return pids.some(pid => {
+        try {
+            process.kill(pid, 0);
+            return true;
+        } catch (err) {
+            return (err as NodeJS.ErrnoException).code === "EPERM";
+        }
+    });
+}
+
 export function close() {
     server?.close();
     server = null;

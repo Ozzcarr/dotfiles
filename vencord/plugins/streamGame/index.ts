@@ -72,6 +72,35 @@ function confirmPicker() {
     });
 }
 
+let watcher: ReturnType<typeof setInterval> | undefined;
+
+function unwatch() {
+    clearInterval(watcher);
+    watcher = undefined;
+}
+
+// The portal never tells Discord the shared window is gone, so the stream would sit on
+// its last frame. Ends it once all of the game's processes have exited, unless it was
+// stopped or replaced first.
+function watch(game: Game) {
+    unwatch();
+    let key: string | null = null;
+
+    watcher = setInterval(async () => {
+        const active = ApplicationStreamingStore.getCurrentUserActiveStream() as Stream | null;
+        key ??= active && streamKey(active);
+        if (key != null && (!active || streamKey(active) !== key)) {
+            unwatch();
+            return;
+        }
+
+        if (!await Native.anyAlive(game.pids)) {
+            unwatch();
+            if (key != null) stopStream(key);
+        }
+    }, 2000);
+}
+
 async function start(game: Game, channelId: string) {
     const channel = ChannelStore.getChannel(channelId);
 
@@ -93,6 +122,7 @@ async function start(game: Game, channelId: string) {
     }
 
     showToast(`Streaming ${game.title}`, "success");
+    watch(game);
 }
 
 export default definePlugin({
@@ -105,6 +135,7 @@ export default definePlugin({
     },
 
     stop() {
+        unwatch();
         Native.close();
     },
 
