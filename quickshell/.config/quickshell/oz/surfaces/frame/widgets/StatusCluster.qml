@@ -49,7 +49,7 @@ RowLayout {
     }
 
     Pill {
-        visible: Services.GameMode.active
+        visible: Host.gaming && Services.GameMode.active
 
         MaterialIcon {
             text: "sports_esports"

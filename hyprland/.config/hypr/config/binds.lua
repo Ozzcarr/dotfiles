@@ -2,6 +2,8 @@
 -- stronger variant), CTRL reshapes, ALT is system. Every bind carries a
 -- description, which is what the cheatsheet lists.
 
+local host = require("config.host")
+
 local mod = "SUPER"
 
 local terminal = "kitty"
@@ -144,8 +146,11 @@ bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }), "Previous worksp
 
 local scratchpads = {
   { key = "M", name = "spotify", label = "Spotify" },
-  { key = "G", name = "gamestore", label = "Game store" },
 }
+
+if host.desktop then
+  table.insert(scratchpads, { key = "G", name = "gamestore", label = "Game store" })
+end
 
 for _, s in ipairs(scratchpads) do
   bind(mod .. " + " .. s.key, hl.dsp.workspace.toggle_special(s.name), s.label .. " scratchpad")
@@ -157,11 +162,13 @@ for _, s in ipairs(scratchpads) do
 end
 
 -- Wooting UwU
-bind("code:191", exec("vesktop-mute"), "Vesktop: mute mic")
-bind("code:192", exec("vesktop-deafen"), "Vesktop: deafen")
-bind("code:193", exec("vesktop-stream"), "Vesktop: stream the game")
-bind("code:194", exec("noise-mode toggle"), "Noise mode")
-bind("code:199", exec("obs-replay save"), "OBS: save replay")
+if host.desktop then
+  bind("code:191", exec("vesktop-mute"), "Vesktop: mute mic")
+  bind("code:192", exec("vesktop-deafen"), "Vesktop: deafen")
+  bind("code:193", exec("vesktop-stream"), "Vesktop: stream the game")
+  bind("code:194", exec("noise-mode toggle"), "Noise mode")
+  bind("code:199", exec("obs-replay save"), "OBS: save replay")
+end
 
 -- Media and hardware keys
 

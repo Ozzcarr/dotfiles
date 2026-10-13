@@ -153,6 +153,8 @@ ColumnLayout {
         Tile {
             Layout.fillWidth: true
 
+            visible: Host.gaming
+
             icon: Services.Replay.active ? "movie" : "videocam_off"
             label: "Replay buffer"
             detail: !Services.Replay.available ? "OBS closed" : Services.Replay.active ? `${Services.Replay.length}s` : "Off"

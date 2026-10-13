@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import qs.config
 
 Singleton {
     id: root
@@ -25,7 +26,7 @@ Singleton {
 
     Timer {
         interval: 2000
-        running: true
+        running: Host.gaming
         repeat: true
         triggeredOnStart: true
 

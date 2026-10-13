@@ -27,7 +27,8 @@ ColumnLayout {
         if (visible) {
             Services.NoiseMode.refresh();
             Services.Audio.refreshSource();
-            Services.Replay.refresh();
+            if (Host.gaming)
+                Services.Replay.refresh();
         }
     }
 

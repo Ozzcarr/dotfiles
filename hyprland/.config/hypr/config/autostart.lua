@@ -1,3 +1,5 @@
+local host = require("config.host")
+
 local hypr_dir = os.getenv("HOME") .. "/dotfiles/hyprland/.config/hypr"
 
 local function restart(process, cmd)
@@ -13,12 +15,14 @@ hl.on("hyprland.start", function()
 
   restart("awww-daemon")
 
-  hl.exec_cmd(hypr_dir .. "/steam-friends-tile.sh")
-
-  -- XWayland has no primary output, so X11 games all land on output 0.
-  hl.exec_cmd("$HOME/.local/bin/set-primary-monitor DP-1")
-
   hl.exec_cmd("sleep 1.0 && wallpaper restore")
 
-  hl.exec_cmd("obs --minimize-to-tray --startreplaybuffer")
+  if host.desktop then
+    hl.exec_cmd(hypr_dir .. "/steam-friends-tile.sh")
+
+    -- XWayland has no primary output, so X11 games all land on output 0.
+    hl.exec_cmd("$HOME/.local/bin/set-primary-monitor DP-1")
+
+    hl.exec_cmd("obs --minimize-to-tray --startreplaybuffer")
+  end
 end)

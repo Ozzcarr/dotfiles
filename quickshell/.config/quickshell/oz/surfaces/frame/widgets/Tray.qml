@@ -11,8 +11,7 @@ Pill {
     id: root
 
     property bool expanded: false
-
-    visible: SystemTray.items.values.length > 0
+    readonly property bool shown: SystemTray.items.values.length > 0
 
     // Hidden when closed, or its spacing slot pushes the chevron off center.
     Item {
