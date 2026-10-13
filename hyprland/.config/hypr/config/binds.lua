@@ -189,3 +189,7 @@ bind("XF86AudioPrev", exec("playerctl --player=" .. players .. " previous"), "Pr
 
 bind("XF86MonBrightnessUp", exec("brightnessctl set +5% && qs -c oz ipc call osd brightness"), "Brightness up", held)
 bind("XF86MonBrightnessDown", exec("brightnessctl set 5%- && qs -c oz ipc call osd brightness"), "Brightness down", held)
+
+-- logind only suspends (and so the shell only locks) outside its 30s holdoff
+-- after boot or resume, and never when docked; the lid locks regardless.
+bind("switch:on:Lid Switch", exec("qs -c oz ipc call lock lock"), "Lock on lid close", media)
