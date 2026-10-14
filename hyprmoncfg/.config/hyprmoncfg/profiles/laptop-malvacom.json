@@ -1,0 +1,127 @@
+{
+  "name": "Laptop Malvacom",
+  "created_at": "2026-10-14T06:04:38.059790884Z",
+  "updated_at": "2026-10-14T12:06:04.540073886Z",
+  "outputs": [
+    {
+      "key": "boe|0x0872",
+      "match_key": "boe|0x0872",
+      "name": "eDP-1",
+      "description": "BOE 0x0872",
+      "make": "BOE",
+      "model": "0x0872",
+      "enabled": true,
+      "mode": "1920x1080@60.03Hz",
+      "width": 1920,
+      "height": 1080,
+      "refresh": 60.03,
+      "x": 0,
+      "y": 300,
+      "scale": 1.25,
+      "transform": 0,
+      "bitdepth": 8,
+      "cm": "srgb",
+      "sdr_brightness": 1,
+      "sdr_saturation": 1,
+      "sdr_min_luminance": 0.2,
+      "sdr_max_luminance": 80,
+      "min_luminance": 0
+    },
+    {
+      "key": "lenovo group limited|len t22i-10|v5cf3688",
+      "match_key": "lenovo group limited|len t22i-10|v5cf3688",
+      "name": "HDMI-A-1",
+      "description": "Lenovo Group Limited LEN T22i-10 V5CF3688",
+      "make": "Lenovo Group Limited",
+      "model": "LEN T22i-10",
+      "serial": "V5CF3688",
+      "enabled": true,
+      "mode": "1920x1080@60.00Hz",
+      "width": 1920,
+      "height": 1080,
+      "refresh": 60,
+      "x": -1920,
+      "y": -108,
+      "scale": 1,
+      "transform": 0,
+      "bitdepth": 8,
+      "cm": "srgb",
+      "sdr_brightness": 1,
+      "sdr_saturation": 1,
+      "sdr_min_luminance": 0.2,
+      "sdr_max_luminance": 80,
+      "min_luminance": 0
+    }
+  ],
+  "workspaces": {
+    "enabled": true,
+    "strategy": "sequential",
+    "max_workspaces": 10,
+    "group_size": 5,
+    "monitor_order": [
+      "lenovo group limited|len t22i-10|v5cf3688",
+      "boe|0x0872"
+    ],
+    "rules": [
+      {
+        "workspace": "1",
+        "output_key": "lenovo group limited|len t22i-10|v5cf3688",
+        "output_name": "HDMI-A-1",
+        "default": true,
+        "persistent": true
+      },
+      {
+        "workspace": "2",
+        "output_key": "lenovo group limited|len t22i-10|v5cf3688",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "3",
+        "output_key": "lenovo group limited|len t22i-10|v5cf3688",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "4",
+        "output_key": "lenovo group limited|len t22i-10|v5cf3688",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "5",
+        "output_key": "lenovo group limited|len t22i-10|v5cf3688",
+        "output_name": "HDMI-A-1"
+      },
+      {
+        "workspace": "6",
+        "output_key": "boe|0x0872",
+        "output_name": "eDP-1",
+        "default": true,
+        "persistent": true
+      },
+      {
+        "workspace": "7",
+        "output_key": "boe|0x0872",
+        "output_name": "eDP-1"
+      },
+      {
+        "workspace": "8",
+        "output_key": "boe|0x0872",
+        "output_name": "eDP-1"
+      },
+      {
+        "workspace": "9",
+        "output_key": "boe|0x0872",
+        "output_name": "eDP-1"
+      },
+      {
+        "workspace": "10",
+        "output_key": "boe|0x0872",
+        "output_name": "eDP-1"
+      },
+      {
+        "workspace": "special:spotify",
+        "output_key": ""
+      }
+    ]
+  },
+  "exec": ""
+}
