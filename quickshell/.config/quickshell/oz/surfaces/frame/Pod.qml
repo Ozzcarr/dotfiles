@@ -38,7 +38,7 @@ Item {
         bite: InverseCorner.Bite.BottomLeft
         size: Tokens.frame.sweep
 
-        x: -width
+        x: -width + 1
         y: Tokens.frame.thickness
     }
 
@@ -48,7 +48,7 @@ Item {
         bite: InverseCorner.Bite.BottomRight
         size: Tokens.frame.sweep
 
-        x: root.width
+        x: root.width - 1
         y: Tokens.frame.thickness
     }
 
