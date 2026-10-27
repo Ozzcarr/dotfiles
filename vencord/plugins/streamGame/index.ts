@@ -34,6 +34,7 @@ interface WebMediaEngine {
 interface Game {
     title: string;
     pids: number[];
+    clients?: string[];
 }
 
 interface Stream {
@@ -104,8 +105,12 @@ function watch(game: Game) {
 async function start(game: Game, channelId: string) {
     const channel = ChannelStore.getChannel(channelId);
 
-    // Venmic matches each entry on its own, so this takes any of the game's processes.
-    await VesktopNative.virtmic.start(game.pids.map(pid => ({ "application.process.id": String(pid) })));
+    // Venmic matches each entry on its own, so this takes any of the game's processes. Streams
+    // from the ALSA plugin only carry their client's id, not the process's.
+    await VesktopNative.virtmic.start([
+        ...game.pids.map(pid => ({ "application.process.id": String(pid) })),
+        ...(game.clients ?? []).map(id => ({ "client.id": id }))
+    ]);
 
     const confirmed = confirmPicker();
     try {
