@@ -118,12 +118,14 @@ RowLayout {
         MaterialIcon {
             visible: root.hasBattery
 
-            text: !root.draining ? "battery_charging_full" : root.charge > 60 ? "battery_6_bar" : root.charge > 30 ? "battery_4_bar" : root.charge > 15 ? "battery_2_bar" : "battery_alert"
+            // battery_charging_full is an empty outline unless the font's FILL axis is on.
+            font.variableAxes: ({ "FILL": text === "battery_charging_full" ? 1 : 0 })
+            text: root.charge >= 95 ? (root.draining ? "battery_full" : "battery_charging_full") : !root.draining ? (root.charge >= 85 ? "battery_charging_90" : root.charge >= 70 ? "battery_charging_80" : root.charge >= 55 ? "battery_charging_60" : root.charge >= 40 ? "battery_charging_50" : root.charge >= 25 ? "battery_charging_30" : "battery_charging_20") : root.charge > 60 ? "battery_6_bar" : root.charge > 30 ? "battery_4_bar" : root.charge > 15 ? "battery_2_bar" : "battery_alert"
             color: root.draining && root.charge <= 15 ? Appearance.danger : root.draining && root.charge <= 30 ? Appearance.warning : Appearance.soft
         }
 
         Text {
-            visible: root.draining
+            visible: root.hasBattery
 
             Layout.alignment: Qt.AlignVCenter
 
