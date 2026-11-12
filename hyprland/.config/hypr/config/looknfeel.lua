@@ -38,6 +38,9 @@ hl.config({
     },
 
     resize_on_border = true,
+
+    -- Lets windows with the immediate rule (games) skip vsync.
+    allow_tearing = true,
   },
 
   decoration = {

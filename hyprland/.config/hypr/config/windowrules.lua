@@ -8,7 +8,7 @@ local tags = {
   { "projects", { [[^(code|code-url-handler)$]] } },
   { "file-manager", { [[^([Tt]hunar)$]] } },
   { "im", { [[^([Vv]esktop)$]], [[^(teams-for-linux)$]] } },
-  { "games", { [[^(gamescope)$]], [[^(steam_app_\d+)$]] } },
+  { "games", { [[^(gamescope)$]], [[^(steam_app_\d+)$]], [[^(osu!)$]] } },
   { "gamestore", { [[^([Ss]team)$]] } },
   {
     "settings",
@@ -182,6 +182,7 @@ hl.window_rule({
   match = { tag = "games*" },
   fullscreen = true,
   no_blur = true,
+  immediate = true,
 })
 
 hl.window_rule({
