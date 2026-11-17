@@ -3,23 +3,19 @@ notARepository: skip
 promptToReturnFromSubprocess: false
 update:
   method: never
-
 os:
   edit: '[ -z "$NVIM" ] && nvim -- {{filename}} || nvim --server "$NVIM" --remote-send "<C-\><C-n>:close<CR>:edit {{filename}}<CR>"'
   editAtLine: '[ -z "$NVIM" ] && nvim +{{line}} -- {{filename}} || nvim --server "$NVIM" --remote-send "<C-\><C-n>:close<CR>:edit {{filename}}<CR>:{{line}}<CR>"'
-
 customCommands:
   - key: "C"
     context: "files"
     description: "Generate commit message with Claude Code"
     command: ~/.config/lazygit/generate-commit-message.sh
     output: logWithPty
-
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never
-
+      command: delta --paging=never
 gui:
   showRandomTip: false
   nerdFontsVersion: "3"
