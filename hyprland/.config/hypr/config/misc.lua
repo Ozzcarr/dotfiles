@@ -20,7 +20,7 @@ hl.config({
   },
 
   render = {
-    direct_scanout = 1,
+    direct_scanout = 2,
   },
 
   xwayland = {

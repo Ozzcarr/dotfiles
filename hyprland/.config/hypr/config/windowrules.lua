@@ -8,7 +8,7 @@ local tags = {
   { "projects", { [[^(code|code-url-handler)$]] } },
   { "file-manager", { [[^([Tt]hunar)$]] } },
   { "im", { [[^([Vv]esktop)$]], [[^(teams-for-linux)$]] } },
-  { "games", { [[^(gamescope)$]], [[^(steam_app_\d+)$]], [[^(osu!)$]] } },
+  { "games", { [[^(gamescope)$]], [[^(steam_app_\d+)$]], [[^(.*\.exe)$]], [[^(osu!)$]] } },
   { "gamestore", { [[^([Ss]team)$]] } },
   {
     "settings",
@@ -126,7 +126,6 @@ hl.window_rule({
   name = "steam-popups-float",
   match = { class = steam, title = "negative:" .. steam_main },
   float = true,
-  pin = true,
 })
 
 hl.window_rule({
