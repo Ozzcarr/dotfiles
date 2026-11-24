@@ -1,5 +1,9 @@
 vim.pack.add({
-  { src = 'https://github.com/norcalli/nvim-colorizer.lua' },
+  { src = 'https://github.com/catgoose/nvim-colorizer.lua' },
 })
 
-require('colorizer').setup(nil, { names = false })
+require('colorizer').setup({
+  options = {
+    parsers = { names = { enable = false } },
+  },
+})
