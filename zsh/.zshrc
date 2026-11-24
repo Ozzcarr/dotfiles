@@ -59,16 +59,16 @@ alias -- ....='cd ../../..'
 alias -- .....='cd ../../../..'
 alias -- c=clear
 alias -- cat=bat
-alias -- eza='eza --icons auto --git --group-directories-first --no-quotes --header --git-ignore '\''--icons=always'\'' --classify --hyperlink'
+alias -- eza='eza --icons auto --git --group-directories-first --no-quotes --header '\''--icons=always'\'' --classify --hyperlink=auto'
 alias -- la='eza -lah '
 alias -- ll='eza -lh --no-user --long'
 alias -- lla='eza -la'
 alias -- ls=eza
-alias -- lt='eza --tree --level=2'
-alias -- lta='eza -a --tree --level=2'
+alias -- lt='eza --tree --level=2 --git-ignore'
+alias -- lta='eza -a --tree --level=2 --git-ignore'
 alias -- man=batman
 alias -- ncg='nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot'
-alias -- tree='eza --tree '
+alias -- tree='eza --tree --git-ignore '
 alias -- rb='nh os rollback'
 alias -- claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
 
