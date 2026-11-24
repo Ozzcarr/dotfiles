@@ -14,6 +14,23 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold' }, {
   end,
 })
 
+-- Makes kitty pass Ctrl+V through; see kitty.conf. tmux does this for its panes.
+if not vim.env.TMUX then
+  local group = vim.api.nvim_create_augroup('kitty-pass-ctrl-v', { clear = true })
+  vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResume' }, {
+    group = group,
+    callback = function()
+      vim.api.nvim_ui_send('\27]1337;SetUserVar=pass_ctrl_v=MQ==\7')
+    end,
+  })
+  vim.api.nvim_create_autocmd({ 'VimLeavePre', 'VimSuspend' }, {
+    group = group,
+    callback = function()
+      vim.api.nvim_ui_send('\27]1337;SetUserVar=pass_ctrl_v\7')
+    end,
+  })
+end
+
 vim.api.nvim_create_autocmd('BufReadCmd', {
   group = vim.api.nvim_create_augroup('open-pdf-externally', { clear = true }),
   pattern = '*.pdf',

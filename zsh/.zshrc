@@ -72,6 +72,17 @@ alias -- tree='eza --tree --git-ignore '
 alias -- rb='nh os rollback'
 alias -- claude-work='CLAUDE_CONFIG_DIR="$HOME/.claude-work" claude'
 
+# Let Claude Code handle Ctrl+V, which also pastes images. See kitty.conf.
+claude() {
+  [[ -t 1 && -z "$TMUX" ]] && printf '\e]1337;SetUserVar=pass_ctrl_v=MQ==\a'
+  command claude "$@"
+}
+
+if [[ -n "$KITTY_WINDOW_ID" && -z "$TMUX" ]]; then
+  reset_pass_ctrl_v() { printf '\e]1337;SetUserVar=pass_ctrl_v\a' }
+  precmd_functions+=(reset_pass_ctrl_v)
+fi
+
 frs() { nh os switch --hostname "$(hostname)" "$@" }
 frb() { nh os boot --hostname "$(hostname)" "$@" }
 fus() { nh os switch --hostname "$(hostname)" --update "$@" }
