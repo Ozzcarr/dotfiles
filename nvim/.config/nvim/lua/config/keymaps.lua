@@ -58,6 +58,18 @@ map('n', '<leader>co', function()
   })
 end, { desc = 'Organize imports' })
 
+-- Paste in insert and command mode
+map('i', '<C-v>', '<C-r><C-o>+', { desc = 'Paste' })
+map('c', '<C-v>', '<C-r><C-r>+', { desc = 'Paste' })
+map('t', '<C-v>', function()
+  -- Claude Code handles the key itself, so that it can also paste images.
+  if vim.api.nvim_buf_get_name(0):match('//%d+:.*claude') then
+    vim.api.nvim_chan_send(vim.b.terminal_job_id, '\22')
+  else
+    vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)
+  end
+end, { desc = 'Paste' })
+
 -- Files
 map({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR>', { desc = 'Save file' })
 
@@ -73,4 +85,8 @@ map('n', '<leader>us', function() vim.wo.spell = not vim.wo.spell end, { desc = 
 map('n', '<leader>uw', function() vim.wo.wrap = not vim.wo.wrap end, { desc = 'Toggle word wrap' })
 map('n', '<leader>ui', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
   { desc = 'Toggle inlay hints' })
+map('n', '<leader>ud', function()
+  local enabled = vim.diagnostic.config().virtual_lines
+  vim.diagnostic.config({ virtual_lines = not enabled and { current_line = true } })
+end, { desc = 'Toggle inline diagnostics' })
 map('n', '<leader>ut', '<cmd>TSContext toggle<CR>', { desc = 'Toggle treesitter context' })

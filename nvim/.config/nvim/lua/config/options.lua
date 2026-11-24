@@ -25,6 +25,9 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = 'split'
 
+-- Diagnostics
+vim.diagnostic.config({ virtual_lines = { current_line = true } })
+
 -- Splits
 vim.opt.splitright = true
 vim.opt.splitbelow = true
