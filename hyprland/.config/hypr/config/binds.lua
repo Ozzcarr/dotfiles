@@ -43,6 +43,49 @@ local function focus_or_launch(class, cmd)
   end
 end
 
+-- Hyprland only warps to windows here, so focusing an empty workspace on another
+-- monitor leaves the cursor, and the focused window, behind. The next refocus,
+-- such as the launcher closing, then goes back to the cursor's monitor.
+local function warp_if_empty(workspace)
+  local monitor = workspace and workspace.monitor
+  if not monitor or not workspace.is_empty then
+    return
+  end
+
+  local at = hl.get_monitor_at_cursor()
+  if not at or at.id == monitor.id then
+    return
+  end
+
+  -- Focusing an empty monitor clears window focus, but only on a monitor change.
+  hl.dispatch(hl.dsp.focus({ monitor = at }))
+  hl.dispatch(hl.dsp.focus({ monitor = monitor }))
+
+  local width, height = monitor.width, monitor.height
+  if monitor.transform % 2 == 1 then -- pre-rotation dimensions
+    width, height = height, width
+  end
+
+  hl.dispatch(hl.dsp.cursor.move({
+    x = monitor.x + width / monitor.scale / 2,
+    y = monitor.y + height / monitor.scale / 2,
+  }))
+end
+
+local function focus_workspace(id)
+  return function()
+    hl.dispatch(hl.dsp.focus({ workspace = id }))
+    warp_if_empty(hl.get_workspace(id))
+  end
+end
+
+local function focus_direction(direction)
+  return function()
+    hl.dispatch(hl.dsp.focus({ direction = direction }))
+    warp_if_empty(hl.get_active_workspace())
+  end
+end
+
 -- Apps
 
 bind(mod .. " + Return", exec(terminal), "Terminal")
@@ -117,7 +160,7 @@ local directions = {
 }
 
 for _, d in ipairs(directions) do
-  bind(mod .. " + " .. d.key, hl.dsp.focus({ direction = d.name }), "Focus " .. d.name)
+  bind(mod .. " + " .. d.key, focus_direction(d.name), "Focus " .. d.name)
   bind(
     mod .. " + " .. d.arrow,
     hl.dsp.window.resize({ x = d.resize[1], y = d.resize[2], relative = true }),
@@ -137,7 +180,7 @@ end
 
 for i = 1, 10 do
   local key = i % 10 -- 10 sits on the 0 key
-  bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }), "Workspace " .. i)
+  bind(mod .. " + " .. key, focus_workspace(i), "Workspace " .. i)
   bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }), "Move window to workspace " .. i)
 end
 
