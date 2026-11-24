@@ -27,7 +27,7 @@ require('lualine').setup({
   sections = {
     lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
     lualine_b = { 'branch', 'diagnostics' },
-    lualine_c = { 'filename' },
+    lualine_c = { { 'filename', path = 1 } },
     lualine_x = { { recording, color = { fg = red } } },
     lualine_y = { 'filetype', 'progress' },
     lualine_z = {
