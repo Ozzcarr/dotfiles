@@ -22,7 +22,5 @@ hl.on("hyprland.start", function()
 
     -- XWayland has no primary output, so X11 games all land on output 0.
     hl.exec_cmd("$HOME/.local/bin/set-primary-monitor DP-1")
-
-    hl.exec_cmd("obs --minimize-to-tray --startreplaybuffer")
   end
 end)
