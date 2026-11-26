@@ -4,6 +4,7 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell.Services.Notifications
 
@@ -16,6 +17,17 @@ Singleton {
     readonly property bool hasNotifications: all.length > 0
 
     readonly property bool dnd: state.dnd
+
+    // While gaming, popups go to a screen the game isn't fullscreen on.
+    readonly property string popupScreen: {
+        const focused = Panels.focusedScreen;
+        if (!GameMode.active)
+            return focused;
+        const free = Hyprland.monitors.values.filter(m => !m.activeWorkspace?.hasFullscreen);
+        if (free.some(m => m.name === focused))
+            return focused;
+        return free[0]?.name ?? focused;
+    }
 
     // Ids of notifications currently shown as popups.
     property list<int> popupIds: []

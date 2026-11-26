@@ -154,7 +154,7 @@ ShellWindow {
             id: side
 
             panel: root.sideOpen ? root.openPanel : ""
-            showPopups: Services.Panels.focusedScreen === root.modelData.name
+            showPopups: Services.Notifications.popupScreen === root.modelData.name
             collapsedWidth: rightPod.width
 
             x: parent.width - width
